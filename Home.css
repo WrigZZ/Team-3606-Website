@@ -1,0 +1,198 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+* {
+  font-family: "Outfit";
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 95, 37);
+  padding: 20px;
+  height: 80px;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  margin-left: 100px;
+}
+.screenshot {
+  height: 120px;
+  display: block;
+  background-color: black;
+}
+
+.midtext {
+margin-right: auto;
+margin-left: auto;
+}
+
+.title {
+font-size: 30px;
+}
+
+.right-group {
+  display: flex;
+  font-size: 22px;
+}
+
+.home {
+  color: rgb(0, 0, 0);
+  padding: 16px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(255, 135, 91);
+  margin-right: 20px;
+  text-decoration: none;
+}
+.home:hover {
+border: 2px solid rgb(0, 0, 0);
+color: rgb(0, 0, 0);
+background-color: rgb(255, 159, 124);
+}
+.sponsors {
+  color: rgb(0, 0, 0);
+  padding:16px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(255, 135, 91);
+  margin-right: 20px;
+  text-decoration: none;
+}
+.sponsors:hover {
+border: 2px solid rgb(0, 0, 0);
+color: rgb(0, 0, 0);
+background-color: rgb(255, 159, 124);
+}
+.thisyear {
+  color: rgb(0, 0, 0);
+  padding:16px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(255, 135, 91);
+  margin-right: 20px;
+  text-decoration: none;
+}
+.thisyear:hover {
+border: 2px solid rgb(0, 0, 0);
+color: rgb(0, 0, 0);
+background-color: rgb(255, 159, 124);
+}
+.pastyears {
+  color: rgb(0, 0, 0);
+  padding:16px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(255, 135, 91);
+  margin-right: 20px;
+  text-decoration: none;
+}
+.pastyears:hover {
+border: 2px solid rgb(0, 0, 0);
+color: rgb(0, 0, 0);
+background-color: rgb(255, 159, 124);
+}
+.gallery {
+  color: rgb(0, 0, 0);
+  padding:16px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(255, 135, 91);
+  margin-right: 20px;
+  text-decoration: none;
+}
+.gallery:hover {
+border: 2px solid rgb(0, 0, 0);
+color: rgb(0, 0, 0);
+background-color: rgb(255, 159, 124);
+}
+.links {
+  color: rgb(0, 0, 0);
+  padding:16px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(255, 135, 91);
+  margin-right: 20px;
+  text-decoration: none;
+}
+.links:hover {
+border: 2px solid rgb(0, 0, 0);
+color: rgb(0, 0, 0);
+background-color: rgb(255, 159, 124);
+}
+.content {
+  margin-top: 175px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.intro {
+  text-align: center;
+  font-size: 50px;
+}
+
+.mainpic {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.seasonmain {
+position: absolute;
+z-index: 2;
+left: 50%;
+right: 50%;
+text-align: center;
+margin: 0;
+padding-top: 100px;
+white-space: nowrap;
+font-size: 50px;
+color: rgb(255, 68, 0);
+border: black;
+}
+
+.footer {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 95, 37);
+  padding: 20px;
+  height: 160px;
+}
+.intralox {
+  height: 160px;
+  margin-right: 100px;
+}
+.first {
+  height: 160px;
+  cursor: pointer;
+}
+.chs {
+  height: 160px;
+  margin-left: 100px;
+}
+.active {
+  background-color: rgb(200, 60, 10);
+  cursor: default;
+  pointer-events: none;
+  border-color: rgb(0, 0, 0);
+}
