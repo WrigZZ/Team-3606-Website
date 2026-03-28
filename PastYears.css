@@ -197,6 +197,7 @@ background-color: rgb(255, 159, 124);
 .intralox {
   height: 160px;
   margin-right: 100px;
+  border-radius: 8px;
 }
 .first {
   height: 160px;

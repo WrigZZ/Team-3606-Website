@@ -3,3 +3,16 @@ blue alliance link - DONE
 fix gallery - DONE
 clean code
 make header and footer look good when sized down
+Round picture corners - DONE
+Make links in links tab not take up full space
+make colors look less "tacky"
+Remove intralox from all sponsors
+Drop down task bar in home instead of tabs
+change orange to black / white with orange accents
+Slideshow for all pages showing pictures realevant for the page
+Accentuate that there is no outside help
+US seal
+make logos smaller in footer
+contact us at:
+Make page which shows current updates
+Clean up gallery - DONE

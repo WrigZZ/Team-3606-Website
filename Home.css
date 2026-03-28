@@ -145,6 +145,7 @@ background-color: rgb(255, 159, 124);
   width: 100%;
   position: relative;
   z-index: 1;
+  border-radius: 8px;
 }
 .seasonmain {
 z-index: 2;
@@ -180,6 +181,7 @@ border: black;
 .intralox {
   height: 160px;
   margin-right: 100px;
+  border-radius: 8px;
 }
 .first {
   height: 160px;

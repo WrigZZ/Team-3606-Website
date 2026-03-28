@@ -149,19 +149,7 @@ background-color: rgb(255, 159, 124);
   margin: 0px;
   margin-bottom: 50px;
 }
-.intraloxsponsor {
-  text-align: center;
-  font-size: 25px;
-  margin: 0px;
-}
-.intraloxsponsorpic {
-  height: 250px;
-}
-.intpicdiv {
-justify-self: center;
-margin-top: 50px;
-margin-bottom: 50px;
-}
+
 .chsspon {
   height: 250px;
 }
@@ -188,17 +176,16 @@ margin-bottom: 50px;
   padding: 20px;
   height: 160px;
 }
-.intralox {
-  height: 160px;
-  margin-right: 100px;
-}
+
 .first {
   height: 160px;
   cursor: pointer;
+  margin-left: 0px;
 }
 .chs {
   height: 160px;
-  margin-left: 100px;
+  margin-left: 50%;
+  margin-right: 0px;
 }
 .active {
   background-color: rgb(200, 60, 10);
