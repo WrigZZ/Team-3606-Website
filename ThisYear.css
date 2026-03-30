@@ -222,11 +222,12 @@ font-size: 30px;
 }
 .currentbot {
   font-size: 100px;
+  justify-self: center;
 }
 .curbotpic {
   justify-self: center;
   border-radius: 8px;
-  max-height: 300px;
+  max-height: 500px;
 }
 
 
