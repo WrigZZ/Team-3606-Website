@@ -2,10 +2,6 @@ clean code
 make header and footer look good when sized down
 Make links in links tab not take up full space
 change orange to black / white with orange accents
-Slideshow for all pages showing pictures realevant for the page
-Accentuate that there is no outside help
-US seal
-make logos smaller in footer
 contact page
-Make page which shows current updates
+support page
 Make comments everywhere
