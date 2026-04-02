@@ -37,7 +37,8 @@ body {
 /* Logo container: pushes the logo away from the left edge */
 .logo {
   display: flex;
-  margin-left: 100px;
+  margin-left: 15%;
+  margin-right: auto;
 }
 
 /* The team logo image: taller than the topbar so it overlaps slightly,
@@ -50,6 +51,7 @@ body {
 
 /* Centers the team name title text between the logo and the menu button */
 .midtext {
+  position: absolute;
   margin-right: auto;
   margin-left: auto;
 }

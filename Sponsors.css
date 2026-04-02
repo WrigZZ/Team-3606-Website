@@ -34,7 +34,8 @@ body {
 /* .logo holds the team logo image on the left side of the topbar */
 .logo {
   display: flex;
-  margin-left: 100px;
+  margin-left: 15%;
+  margin-right: auto;
 }
 
 /* .screenshot is the team logo image inside .logo */
@@ -47,6 +48,7 @@ body {
 /* .midtext is the container for the team name centered in the topbar */
 /* margin auto on both sides pushes it to the center */
 .midtext {
+  position: absolute;
   margin-right: auto;
   margin-left: auto;
 }
