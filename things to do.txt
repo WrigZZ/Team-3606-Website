@@ -1,7 +1,4 @@
-make the logos in footer different
 Current news section
-
-
 
 remember to do the sitemap stuff when it goes live
 Change the share url stuff when it goes live:

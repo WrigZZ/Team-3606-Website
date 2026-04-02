@@ -300,6 +300,7 @@ body {
   text-align: center;
   position: absolute;
   justify-self: center;
+  font-weight: 700;  
   margin: 0;
   padding-top: 100px;
   white-space: nowrap;
