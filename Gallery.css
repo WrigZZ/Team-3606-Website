@@ -435,7 +435,10 @@ body {
   }
 
   .slidepic {
-    max-height: 300px;
+  max-width: 350px;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
   }
 
   .slidetitle {

@@ -1,1 +1,1 @@
-Mobile look good
+Make mobile not have weird bugs
