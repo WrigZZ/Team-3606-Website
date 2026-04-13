@@ -269,6 +269,7 @@ body {
 .content {
   margin-top: 175px;
   margin-left: 10%;
+  color: rgb(255, 68, 0);
   margin-right: 10%;
 }
 
@@ -277,6 +278,8 @@ body {
 .pagetitle {
   justify-self: center;
   font-size: 70px;
+  color: black;
+  font-weight: 600;
 }
 
 /* .description is the overview paragraph about the regional competition */

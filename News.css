@@ -230,6 +230,7 @@ body {
 .content {
   margin-top: 150px;
   margin-left: 10%;
+  color: rgb(255, 68, 0);
   margin-right: 10%;
   margin-bottom: 60px;
 }
@@ -239,6 +240,8 @@ body {
   text-align: center;
   margin: 0;
   margin-bottom: 40px;
+  color: black;
+  font-weight: 600;
 }
 
 /* =====================

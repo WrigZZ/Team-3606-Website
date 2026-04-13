@@ -274,6 +274,7 @@ body {
 .content {
   margin-top: 175px;
   margin-left: 10%;
+  color: rgb(255, 68, 0);
   margin-right: 10%;
 }
 
@@ -281,7 +282,10 @@ body {
 .intro {
   text-align: center;
   font-size: 50px;
+  color: black;
+  font-weight: 600;
 }
+
 
 /* .mainpic is the main team photo on the homepage */
 /* width: 100% makes it fill the full width of .content */

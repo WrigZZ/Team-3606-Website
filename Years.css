@@ -278,6 +278,7 @@ body {
 .content {
   margin-top: 175px;
   margin-left: 10%;
+  color: rgb(255, 68, 0);
   margin-right: 10%;
 }
 
@@ -286,6 +287,8 @@ body {
   font-size: 70px;
   text-align: center;
   margin: 0px;
+  color: black;
+  font-weight: 600;
   margin-bottom: 50px;
 }
 
