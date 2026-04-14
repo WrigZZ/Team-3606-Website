@@ -9,6 +9,11 @@ const title = document.getElementById('slide-title');
 const counter = document.getElementById('slide-counter');
 // "slide-counter" is the element that displays "1 / 14" style progress text
 
+// Allows using the left and right arrow keys to navigate the slideshow
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') go(cur - 1);
+  if (e.key === 'ArrowRight') go(cur + 1);
+});
 
 // slides is the array of all photos in the slideshow
 // Each object has a title (caption) and src (path to the image file)
