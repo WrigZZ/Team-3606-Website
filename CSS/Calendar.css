@@ -741,7 +741,7 @@ body {
   .logo {
     margin-left: 20px;
   }
-
+  .midtext { max-width: 35%; }
   .screenshot {
     height: 70px;
   }

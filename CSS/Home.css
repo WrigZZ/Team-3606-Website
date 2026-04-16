@@ -439,6 +439,8 @@ body {
   .screenshot { height: 70px; }
   .title { font-size: 20px; }
   .menudiv { margin-right: 15px; }
+  .midtext { max-width: 35%; }
+  
 
   .content {
     margin-top: 120px;
