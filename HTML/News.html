@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News</title>
+  <link rel="stylesheet" href="/BearMetal Website/CSS/News.css">
+  <link rel="icon" type="image/png" href="/BearMetal Website/Gallery/Other/Favicon.png">
+  <meta property="og:title" content="News - Bear Metal Team 3606">
+  <meta property="og:description" content="Latest news and updates from Bear Metal Team 3606.">
+  <meta property="og:image" content="https://bearmetal3606.com/Gallery/2026/2026Team2.jpeg">
+  <meta property="og:url" content="https://bearmetal3606.com/News.html">
+  <meta property="og:type" content="website">
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="logo">
+      <a href="/BearMetal Website/HTML/Home.html">
+        <img src="/BearMetal Website/Gallery/Other/3606Logo.png" alt="Logo" class="screenshot" id="screenshot">
+      </a>
+    </div>
+    <div class="midtext">
+      <p class="title">Bear Metal Team 3606</p>
+    </div>
+    <div class="menudiv">
+      <button class="menu" id="menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="dropdown" id="dropdown">
+        <a href="/BearMetal Website/HTML/Home.html" class="droplink">Home</a>
+        <a href="/BearMetal Website/HTML/Sponsors.html" class="droplink">Sponsors</a>
+        <a href="/BearMetal Website/HTML/ThisSeason.html" class="droplink">This Season</a>
+        <a href="/BearMetal Website/HTML/Gallery.html" class="droplink">Gallery</a>
+        <a href="/BearMetal Website/HTML/News.html" class="droplink active">News</a>
+        <a href="/BearMetal Website/HTML/Calendar.html" class="droplink">Calendar</a>
+        <div class="droplink historymenu" id="history-btn">
+          History <span class="arrow">&#129030;</span>
+          <div class="subdropdown" id="subdropdown">
+            <a href="/BearMetal Website/YearsHTML/2026.html" class="sublink">2026</a>
+            <a href="/BearMetal Website/YearsHTML/2025.html" class="sublink">2025</a>
+            <a href="/BearMetal Website/YearsHTML/2024.html" class="sublink">2024</a>
+            <a href="/BearMetal Website/YearsHTML/2023.html" class="sublink">2023</a>
+            <a href="/BearMetal Website/YearsHTML/2022.html" class="sublink">2022</a>
+            <a href="/BearMetal Website/YearsHTML/2021.html" class="sublink">2021</a>
+            <a href="/BearMetal Website/YearsHTML/2020.html" class="sublink">2020</a>
+            <a href="/BearMetal Website/YearsHTML/2019.html" class="sublink">2019</a>
+            <a href="/BearMetal Website/YearsHTML/2018.html" class="sublink">2018</a>
+            <a href="/BearMetal Website/YearsHTML/2017.html" class="sublink">2017</a>
+            <a href="/BearMetal Website/YearsHTML/2016.html" class="sublink">2016</a>
+            <a href="/BearMetal Website/YearsHTML/2015.html" class="sublink">2015</a>
+            <a href="/BearMetal Website/YearsHTML/2014.html" class="sublink">2014</a>
+            <a href="/BearMetal Website/YearsHTML/2013.html" class="sublink">2013</a>
+            <a href="/BearMetal Website/YearsHTML/2012.html" class="sublink">2012</a>
+            <a href="/BearMetal Website/YearsHTML/2011.html" class="sublink">2011</a>
+          </div>
+        </div>
+        <div class="theme-row" id="theme-row">
+          <span class="theme-label">
+            <span id="theme-icon">☀️</span>
+            <span id="theme-text">Light Mode</span>
+          </span>
+          <label class="toggle-switch" title="Toggle dark mode">
+            <input type="checkbox" id="theme-toggle">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <p class="pagetitle">News</p>
+    <div class="news-container" id="news-container">
+      <p class="loading-msg" id="loading-msg">Loading articles...</p>
+    </div>
+    <button class="edit-btn" id="edit-btn">&#9998; Edit</button>
+  </div>
+
+
+  <!-- PASSCODE MODAL -->
+  <div class="overlay" id="passcode-overlay">
+    <div class="modal-box">
+      <p class="modal-title">Enter Passcode</p>
+      <input type="password" class="passcode-input" id="passcode-input" maxlength="6"
+        placeholder="&bull;&bull;&bull;&bull;&bull;&bull;">
+      <p class="error-msg" id="passcode-error"></p>
+      <div class="modal-buttons">
+        <button class="modal-btn cancel-btn" id="passcode-cancel">Cancel</button>
+        <button class="modal-btn confirm-btn" id="passcode-submit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ADMIN MODAL -->
+  <div class="overlay" id="admin-overlay">
+    <div class="modal-box admin-box">
+      <p class="modal-title">Edit News</p>
+      <div class="admin-section">
+        <p class="section-label">Add Article</p>
+        <input type="text" class="admin-input" id="article-title" placeholder="Title">
+        <input type="url" class="admin-input" id="article-image" placeholder="Image URL (optional)">
+        <textarea class="admin-input admin-textarea" id="article-desc" placeholder="Article content"></textarea>
+        <button class="modal-btn confirm-btn" id="add-article-btn">Post Article</button>
+      </div>
+      <div class="admin-section">
+        <p class="section-label">Existing Articles</p>
+        <div id="admin-articles-list"></div>
+      </div>
+      <button class="modal-btn cancel-btn" id="close-admin">Close</button>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <div class="topbit">
+      <a href="https://www.firstinspires.org/" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/FirstLogo.png" alt="FIRST" class="footerlink">
+      </a>
+      <a href="https://www.thebluealliance.com/team/3606" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/BlueAlianceLogo.png" alt="Blue Alliance" class="footerlink">
+      </a>
+      <a href="https://www.catholichigh.org/" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/CatholicLogo.jpg" alt="CHS" class="footerlink">
+      </a>
+      <a href="https://github.com/chs3606/FRC2026-FORKED" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/GithubLogo.png" alt="Code" class="footerlink">
+      </a>
+      <a href="https://github.com/WrigZZ/Team-3606-Website" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/GithubLogo.png" alt="Web Code" class="footerlink">
+      </a>
+    </div>
+    <div class="bottombit">
+      <a target="_blank"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSf-ARXAgibs5XYvToSkP_Xz5c5w89AbsWZ_nEj2urVqudIYmw/viewform?usp=publish-editor"
+        class="link">Contact Us</a>
+      <a target="_blank"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSd3Ozljtnx2aHu-FZ0SQ16fMAEZm4VjGRfBngM0sldzolF4mw/viewform?usp=publish-editor"
+        class="link">Support Us</a>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2026 Bear Metal Team 3606</p>
+    </div>
+  </div>
+
+
+  <script type="module">
+
+    // BUG FIX: The old imports used npm-style paths ("firebase/app", "firebase/analytics")
+    // which only work in a Node.js build environment, not in a plain browser script tag.
+    // All Firebase imports must use the full CDN URLs shown below.
+    // The old script was also missing ALL of the Firestore imports (getFirestore, collection,
+    // addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy) — they were used
+    // but never imported, so the entire script crashed on load and showed "Loading articles..."
+    // forever.
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCBQLHlQLv708JDF55ClvThg4iBGAxC1Z0",
+      authDomain: "bearmetal3606-d4975.firebaseapp.com",
+      projectId: "bearmetal3606-d4975",
+      storageBucket: "bearmetal3606-d4975.firebasestorage.app",
+      messagingSenderId: "693146086909",
+      appId: "1:693146086909:web:33e29afe52ebf239eb7d94"
+    };
+
+    const PASSCODE = "863759";
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    let articles = [];
+
+    // Fetch articles from Firestore ordered newest first
+    async function loadArticles() {
+      try {
+        const q        = query(collection(db, "news_articles"), orderBy("timestamp", "desc"));
+        const snapshot = await getDocs(q);
+        articles = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderArticles();
+      } catch (err) {
+        console.error("Failed to load articles:", err);
+        document.getElementById("loading-msg").textContent = "Failed to load articles: " + err.message;
+      }
+    }
+
+    function renderArticles() {
+      const container = document.getElementById("news-container");
+      document.getElementById("loading-msg")?.remove();
+      container.innerHTML = "";
+
+      if (articles.length === 0) {
+        container.innerHTML = "<p class='no-articles-msg'>No articles yet. Check back soon!</p>";
+        return;
+      }
+
+      articles.forEach(article => {
+        const card = document.createElement("div");
+        card.className = "news-card";
+
+        let timeStr = "";
+        if (article.timestamp) {
+          const date = article.timestamp.toDate();
+          timeStr = date.toLocaleDateString("en-US", {
+            year: "numeric", month: "long", day: "numeric",
+            hour: "2-digit", minute: "2-digit"
+          });
+        }
+
+        card.innerHTML = `
+          <div class="news-card-header">
+            <p class="news-title">${article.title}</p>
+            <p class="news-time">${timeStr}</p>
+          </div>
+          ${article.imageUrl ? `<img class="news-image" src="${article.imageUrl}" alt="${article.title}">` : ""}
+          <p class="news-desc">${article.description}</p>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Passcode modal
+    document.getElementById("edit-btn").onclick = () => {
+      document.getElementById("passcode-overlay").style.display = "flex";
+      document.getElementById("passcode-input").value           = "";
+      document.getElementById("passcode-error").textContent     = "";
+    };
+
+    document.getElementById("passcode-cancel").onclick = () => {
+      document.getElementById("passcode-overlay").style.display = "none";
+    };
+
+    document.getElementById("passcode-submit").onclick = () => {
+      const input = document.getElementById("passcode-input").value;
+      if (input === PASSCODE) {
+        document.getElementById("passcode-overlay").style.display = "none";
+        openAdmin();
+      } else {
+        document.getElementById("passcode-error").textContent = "Incorrect passcode. Try again.";
+      }
+    };
+
+    document.getElementById("passcode-input").addEventListener("keydown", e => {
+      if (e.key === "Enter") document.getElementById("passcode-submit").click();
+    });
+
+    // Admin modal
+    function openAdmin() {
+      document.getElementById("admin-overlay").style.display = "flex";
+      renderAdminList();
+    }
+
+    document.getElementById("close-admin").onclick = () => {
+      document.getElementById("admin-overlay").style.display = "none";
+    };
+
+    function renderAdminList() {
+      const list = document.getElementById("admin-articles-list");
+      list.innerHTML = "";
+
+      if (articles.length === 0) {
+        list.innerHTML = "<p class='no-articles-msg'>No articles yet.</p>";
+        return;
+      }
+
+      articles.forEach(article => {
+        let timeStr = "";
+        if (article.timestamp) {
+          const date = article.timestamp.toDate();
+          timeStr = date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+        }
+
+        const row = document.createElement("div");
+        row.className = "admin-event-row";
+        row.innerHTML = `
+          <div class="admin-event-info">
+            <span class="admin-event-name">${article.title}</span>
+            <span class="admin-event-date">${timeStr}</span>
+          </div>
+          <button class="delete-btn" data-id="${article.id}">Delete</button>
+        `;
+
+        row.querySelector(".delete-btn").onclick = async () => {
+          const btn = row.querySelector(".delete-btn");
+          btn.textContent = "Deleting...";
+          btn.disabled    = true;
+          try {
+            await deleteDoc(doc(db, "news_articles", article.id));
+            articles = articles.filter(a => a.id !== article.id);
+            renderArticles();
+            renderAdminList();
+          } catch (err) {
+            console.error("Delete failed:", err);
+            btn.textContent = "Delete";
+            btn.disabled    = false;
+            alert("Delete failed: " + err.message);
+          }
+        };
+
+        list.appendChild(row);
+      });
+    }
+
+    document.getElementById("add-article-btn").onclick = async () => {
+      const title       = document.getElementById("article-title").value.trim();
+      const imageUrl    = document.getElementById("article-image").value.trim();
+      const description = document.getElementById("article-desc").value.trim();
+
+      if (!title || !description) {
+        alert("Please enter at least a title and article content.");
+        return;
+      }
+
+      const btn = document.getElementById("add-article-btn");
+      btn.textContent = "Posting...";
+      btn.disabled    = true;
+
+      try {
+        const docRef = await addDoc(collection(db, "news_articles"), {
+          title,
+          imageUrl: imageUrl || "",
+          description,
+          timestamp: serverTimestamp()
+        });
+
+        articles.unshift({
+          id: docRef.id,
+          title,
+          imageUrl: imageUrl || "",
+          description,
+          timestamp: { toDate: () => new Date() }
+        });
+
+        document.getElementById("article-title").value = "";
+        document.getElementById("article-image").value = "";
+        document.getElementById("article-desc").value  = "";
+
+        renderArticles();
+        renderAdminList();
+      } catch (err) {
+        console.error("Post failed:", err);
+        alert("Failed to post article: " + err.message);
+      } finally {
+        btn.textContent = "Post Article";
+        btn.disabled    = false;
+      }
+    };
+
+    loadArticles();
+
+  </script>
+
+  <script src="/BearMetal Website/JS/Menu.js"></script>
+
+</body>
+
+</html>

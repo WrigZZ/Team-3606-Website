@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="/BearMetal Website/CSS/Home.css">
+  <link rel="icon" type="image/png" href="/BearMetal Website/Gallery/Other/Favicon.png">
+  <meta property="og:title" content="Bear Metal Team 3606">
+  <meta property="og:description"
+    content="FIRST Robotics Team 3606 based at Catholic High School in Baton Rouge, Louisiana.">
+  <meta property="og:image" content="https://bearmetal3606.com/Gallery/2026/2026Team2.jpeg">
+  <meta property="og:url" content="https://bearmetal3606.com/Home.html">
+  <meta property="og:type" content="website">
+</head>
+
+<body>
+
+  <!-- .topbar is the navigation bar fixed across the top of the page -->
+  <nav class="topbar">
+
+    <!-- .logo holds the team logo in the top-left of the topbar -->
+    <div class="logo">
+      <a href="/BearMetal Website/HTML/Home.html">
+        <img src="/BearMetal Website/Gallery/Other/3606Logo.png" alt="Logo" class="screenshot" id="screenshot">
+      </a>
+    </div>
+
+    <!-- .midtext holds the team name centered in the topbar -->
+    <div class="midtext">
+      <p class="title">Bear Metal Team 3606</p>
+    </div>
+
+    <!-- .menudiv wraps the hamburger button and dropdown menu together -->
+    <div class="menudiv">
+
+      <!-- .menu is the hamburger button -->
+      <button class="menu" id="menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- .dropdown is the navigation menu that appears when the hamburger is clicked -->
+      <div class="dropdown" id="dropdown">
+
+        <a href="/BearMetal Website/HTML/Home.html" class="droplink active">Home</a>
+        <a href="/BearMetal Website/HTML/Sponsors.html" class="droplink">Sponsors</a>
+        <a href="/BearMetal Website/HTML/ThisSeason.html" class="droplink">This Season</a>
+        <a href="/BearMetal Website/HTML/Gallery.html" class="droplink">Gallery</a>
+        <a href="/BearMetal Website/HTML/News.html" class="droplink">News</a>
+        <a href="/BearMetal Website/HTML/Calendar.html" class="droplink">Calendar</a>
+
+        <!-- .historymenu is the "History" item with a nested submenu -->
+        <div class="droplink historymenu" id="history-btn">
+          History <span class="arrow">&#129030</span>
+          <div class="subdropdown" id="subdropdown">
+            <a href="/BearMetal Website/YearsHTML/2026.html" class="sublink">2026</a>
+            <a href="/BearMetal Website/YearsHTML/2025.html" class="sublink">2025</a>
+            <a href="/BearMetal Website/YearsHTML/2024.html" class="sublink">2024</a>
+            <a href="/BearMetal Website/YearsHTML/2023.html" class="sublink">2023</a>
+            <a href="/BearMetal Website/YearsHTML/2022.html" class="sublink">2022</a>
+            <a href="/BearMetal Website/YearsHTML/2021.html" class="sublink">2021</a>
+            <a href="/BearMetal Website/YearsHTML/2020.html" class="sublink">2020</a>
+            <a href="/BearMetal Website/YearsHTML/2019.html" class="sublink">2019</a>
+            <a href="/BearMetal Website/YearsHTML/2018.html" class="sublink">2018</a>
+            <a href="/BearMetal Website/YearsHTML/2017.html" class="sublink">2017</a>
+            <a href="/BearMetal Website/YearsHTML/2016.html" class="sublink">2016</a>
+            <a href="/BearMetal Website/YearsHTML/2015.html" class="sublink">2015</a>
+            <a href="/BearMetal Website/YearsHTML/2014.html" class="sublink">2014</a>
+            <a href="/BearMetal Website/YearsHTML/2013.html" class="sublink">2013</a>
+            <a href="/BearMetal Website/YearsHTML/2012.html" class="sublink">2012</a>
+            <a href="/BearMetal Website/YearsHTML/2011.html" class="sublink">2011</a>
+          </div>
+        </div>
+
+        <!-- =====================
+             THEME TOGGLE ROW
+             Last item in the dropdown — rounded bottom corners from .theme-row in CSS
+             Clicking the switch toggles dark mode on <body> and saves the preference
+             ===================== -->
+        <div class="theme-row" id="theme-row">
+          <span class="theme-label">
+            <!-- Sun icon for light, moon for dark — swapped by JS -->
+            <span id="theme-icon"></span>
+            <span id="theme-text">Light Mode</span>
+          </span>
+          <label class="toggle-switch" title="Toggle dark mode">
+            <!-- The checkbox drives the CSS toggle via :checked -->
+            <input type="checkbox" id="theme-toggle">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+
+      </div>
+      <!-- End .dropdown -->
+
+    </div>
+    <!-- End .menudiv -->
+
+  </nav>
+  <!-- End .topbar -->
+
+  <!-- .content is the main body section of the homepage -->
+  <div class="content">
+    <div>
+      <p class="intro">Catholic High School's Team 3606</p>
+    </div>
+    <p class="intro">Bear Metal</p>
+
+    <!-- .piccontainer wraps the season label and main team photo -->
+    <div class="piccontainer">
+      <p class="seasonmain">2026 Season</p>
+      <img src="/BearMetal Website/Gallery/2026/2026Team2.jpg" style="border: 3px solid black;" alt="2026 Team Pic" class="mainpic">
+    </div>
+
+    <p class="description">
+      Team 3606 Bear Metal is a FIRST robotics team based in Baton Rouge Louisiana at Catholic High School. Team 3606
+      has been competing in FIRST competitions since 2011. We help students obtain new knowledge in programming,
+      electrical work, and mechanical work.
+    </p>
+
+  </div>
+  <!-- End .content -->
+
+  <!-- .footer is the bottom bar of the page -->
+  <div class="footer">
+
+    <div class="topbit">
+      <a href="https://www.firstinspires.org/" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/FirstLogo.png" alt="FIRST" class="footerlink">
+      </a>
+      <a href="https://www.thebluealliance.com/team/3606" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/BlueAlianceLogo.png" alt="Blue Alliance" class="footerlink">
+      </a>
+      <a href="https://www.catholichigh.org/" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/CatholicLogo.jpg" alt="CHS" class="footerlink">
+      </a>
+      <a href="https://github.com/chs3606/FRC2026-FORKED" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/GithubLogo.png" alt="Code" class="footerlink">
+      </a>
+      <a href="https://github.com/WrigZZ/Team-3606-Website" target="_blank">
+        <img src="/BearMetal Website/Gallery/Other/GithubLogo.png" alt="Web Code" class="footerlink">
+      </a>
+    </div>
+
+    <div class="bottombit">
+      <a target="_blank"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSf-ARXAgibs5XYvToSkP_Xz5c5w89AbsWZ_nEj2urVqudIYmw/viewform?usp=publish-editor"
+        class="link">Contact Us</a>
+      <a target="_blank"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSd3Ozljtnx2aHu-FZ0SQ16fMAEZm4VjGRfBngM0sldzolF4mw/viewform?usp=publish-editor"
+        class="link">Support Us</a>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; 2026 Bear Metal Team 3606</p>
+    </div>
+
+  </div>
+  <!-- End .footer -->
+
+  <!-- Menu.js handles the hamburger menu and History submenu logic -->
+  <script src="/BearMetal Website/JS/Menu.js"></script>
+
+
+</body>
+
+</html>
