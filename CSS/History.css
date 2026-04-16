@@ -1,0 +1,544 @@
+/* Import the Montserrat font from Google Fonts, supporting weights 100 through 900 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =====================
+   THEME VARIABLES
+   ===================== */
+
+/* Light theme (default) */
+:root {
+  --bg:            rgb(250, 250, 250);
+  --text-primary:  rgb(0, 0, 0);
+  --text-title:  rgb(255, 255, 255);
+  --text-body:     rgb(255, 68, 0);
+  --topbar-bg:     rgb(36, 36, 36);
+  --footer-bg:     rgb(36, 36, 36);
+  --footer-text:   rgb(255, 255, 255);
+  --logo-bg:       black;
+  --bluelink: black;
+}
+
+/* Dark theme — applied when <body> has class "dark" */
+body.dark {
+  --bg:            rgb(18, 18, 18);
+  --text-primary:  rgb(255, 255, 255);
+  --text-title:  rgb(255, 255, 255);
+  --text-body:     rgb(255, 100, 50);
+  --topbar-bg:     rgb(80, 80, 80);
+  --footer-bg:     rgb(80, 80, 80);
+  --footer-text:   rgb(255, 255, 255);
+  --logo-bg:       rgb(10, 10, 10);
+  --bluelink: white;
+}
+
+/* Apply the Montserrat font to every element on the page */
+* {
+  font-family: "Montserrat";
+}
+
+/* Remove default browser margin and padding from the body */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+}
+
+/* =====================
+   TOPBAR / NAVIGATION
+   ===================== */
+
+/* Fixed navigation bar that stays at the top of the screen at all times.
+   Uses flexbox to horizontally center and align its children (logo, midtext, menudiv) */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--topbar-bg);
+  padding: 20px;
+  height: 80px;
+  z-index: 100;
+  /* Sits above normal page content */
+}
+
+/* Logo container: pushes the logo away from the left edge */
+.logo {
+  display: flex;
+  margin-left: 15%;
+  margin-right: auto;
+}
+
+/* The team logo image: taller than the topbar so it overlaps slightly,
+   with a black background to fill any transparent areas */
+.screenshot {
+  height: 120px;
+  display: block;
+  background-color: var(--logo-bg);
+}
+
+/* Centers the team name title text between the logo and the menu button */
+.midtext {
+  position: absolute;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Team name text size */
+.title {
+  font-size: 40px;
+  font-weight: 500;
+  color: white;
+}
+
+/* =====================
+   HAMBURGER MENU
+   ===================== */
+
+/* Wrapper for the hamburger button and dropdown — positioned relatively
+   so the dropdown can be absolutely positioned below it */
+.menudiv {
+  position: relative;
+  margin-right: 40px;
+}
+
+/* The hamburger button itself: styled as three stacked lines using flex column layout.
+   Background and border removed so it blends into the topbar */
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 36px;
+  height: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Each of the three lines in the hamburger button */
+.menu span {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  /* Smooth animation when transforming into an X */
+}
+
+/* When the menu is open, rotate the top line down to form the top of an X */
+.menu.open span:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+
+/* When the menu is open, hide the middle line */
+.menu.open span:nth-child(2) {
+  opacity: 0;
+}
+
+/* When the menu is open, rotate the bottom line up to form the bottom of an X */
+.menu.open span:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
+
+/* =====================
+   DROPDOWN MENU
+   ===================== */
+
+/* The main dropdown menu: hidden by default, positioned below the hamburger button.
+   Becomes visible when the open class is added via Menu.js */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 24px);
+  right: 0;
+  background-color: rgb(255, 95, 37);
+  border: 2px solid black;
+  min-width: 180px;
+  flex-direction: column;
+  z-index: 200;
+  border-radius: 5px;
+  /* Animation properties */
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Rounds the bottom corners of the last droplink to match the dropdown's border-radius */
+.droplink:last-child {
+  border-radius: 0 0 8px 8px;
+  border-bottom: none;
+}
+
+/* Makes the dropdown visible when the open class is toggled on by Menu.js */
+.dropdown.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Individual link items inside the dropdown */
+.droplink {
+  color: black;
+  text-decoration: none;
+  padding: 14px 20px;
+  font-size: 18px;
+  background-color: rgb(255, 135, 91);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  /* Smooth hover color change */
+  position: relative;
+  /* Needed for the subdropdown to position against */
+}
+
+/* Hover state for droplinks: lightens the background */
+.droplink:hover {
+  background-color: rgb(255, 159, 124);
+}
+
+/* Active state for the current page's droplink: darkens it and disables clicking */
+.droplink.active {
+  background-color: rgb(200, 60, 10);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* =====================
+   History SUBMENU
+   ===================== */
+
+/* The "History" droplink row: uses flexbox to space the label and arrow apart */
+.historymenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  /* Prevents text selection when clicking */
+  position: relative;
+}
+
+/* The arrow icon (▸) next to "History" */
+.arrow {
+  transition: transform 0.2s ease;
+  /* Smoothly rotates when subdropdown opens */
+}
+
+/* Rotates the arrow 90 degrees when the historymenu is open */
+.historymenu.open .arrow {
+  transform: rotate(90deg);
+}
+
+/* The subdropdown that appears to the left of the "History" item.
+   Hidden by default; scrollable since there are many year links */
+.subdropdown {
+  flex-direction: column;
+  position: absolute;
+  right: 100%;
+  bottom: 0;
+  background-color: rgb(255, 115, 65);
+  border: 2px solid black;
+  border-radius: 10px;
+  min-width: 140px;
+  max-height: 264px;
+  overflow-y: auto;
+  z-index: 300;
+  /* Animation properties */
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Custom scrollbar styling for the subdropdown — width of the scrollbar track */
+.subdropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* The scrollbar track (background channel the thumb slides along) */
+.subdropdown::-webkit-scrollbar-track {
+  background: rgb(255, 95, 37);
+  border-radius: 10px;
+  margin: 3px;
+}
+
+/* The scrollbar thumb (the draggable part) */
+.subdropdown::-webkit-scrollbar-thumb {
+  background: rgb(200, 60, 10);
+  border-radius: 10px;
+}
+
+/* Darkens the scrollbar thumb when hovered */
+.subdropdown::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+
+/* Makes the subdropdown visible when the open class is toggled on by Menu.js */
+.subdropdown.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Individual year links inside the subdropdown */
+.sublink {
+  color: black;
+  text-decoration: none;
+  padding: 12px 30px;
+  font-size: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+  /* Smooth hover color change */
+}
+
+/* Hover state for sublinks: lightens the background */
+.sublink:hover {
+  background-color: rgb(255, 159, 124);
+}
+
+/* =====================
+   THEME TOGGLE ROW
+   ===================== */
+ 
+/* The row inside the dropdown that holds the toggle switch */
+.theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: rgb(255, 135, 91);
+  border-radius: 0 0 5px 5px;
+  border-bottom: none;
+  cursor: default;
+  user-select: none;
+}
+ 
+.theme-label {
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+ 
+/* The toggle switch track */
+.toggle-switch {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  flex-shrink: 0;
+}
+ 
+/* Hide the real checkbox */
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+ 
+/* The visual slider track */
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1.5px solid rgba(0,0,0,0.3);
+}
+ 
+/* The sliding circle (thumb) */
+.toggle-track::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+ 
+/* When checked (dark mode), slide the thumb to the right and darken the track */
+.toggle-switch input:checked + .toggle-track {
+  background-color: rgba(0,0,0,0.55);
+}
+ 
+.toggle-switch input:checked + .toggle-track::before {
+  transform: translateY(-50%) translateX(22px);
+  background-color: rgb(36, 36, 36);
+}
+
+/* =====================
+   MAIN PAGE CONTENT
+   ===================== */
+
+/* Pushes the content below the fixed topbar and adds horizontal breathing room */
+.content {
+  margin-top: 175px;
+  margin-left: 10%;
+  color: var(--text-body);
+  margin-right: 10%;
+}
+
+/* Large centered year heading at the top of each year page */
+.pagetitle {
+  font-size: 70px;
+  text-align: center;
+  margin: 0px;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+/* Centered season description text */
+.description {
+  font-size: 40px;
+  text-align: center;
+}
+
+/* The team's win/loss record image: stretches to the full width of the content area */
+.record {
+  justify-content: center;
+  width: 100%;
+}
+
+/* A secondary record image (used on some pages) with extra top margin to separate it
+   from content above */
+.record2 {
+  justify-content: center;
+  width: 100%;
+  margin-top: 100px;
+}
+
+/* The Blue Alliance external link styling */
+.bluelink {
+  color: var(--bluelink);
+  font-size: 40px;
+  display: block;
+  text-align: center;
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+
+/* Footer container: block layout, centered content, orange background matching the topbar */
+.footer {
+  display: block;
+  align-content: center;
+  justify-items: center;
+  margin-top: 50px;
+  background: var(--footer-bg);
+  padding: 20px;
+  height: 200px;
+}
+
+/* Top row of the footer: holds the partner/resource logo images in a centered flex row */
+.topbit {
+  flex: 1;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Each logo image link in the footer topbit row */
+.footerlink {
+  height: 80px;
+  border-radius: 40px;
+  /* Rounds the logo images into pill/circle shapes */
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Bottom row of the footer: holds the Contact Us and Support Us text links */
+.bottombit {
+  display: block;
+  margin-top: 20px;
+}
+
+/* Text links in the bottombit row */
+.link {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+
+.copyright {
+  color: var(--footer-text);
+}
+
+
+/* Active state used globally: darkens the element, disables pointer interaction,
+   and sets a solid black border — used to indicate the current page in nav links */
+.active {
+  background-color: rgb(200, 60, 10);
+  cursor: default;
+  pointer-events: none;
+  border-color: rgb(0, 0, 0);
+}
+
+@media (max-width: 768px) {
+  .logo {
+    margin-left: 20px;
+  }
+
+  .screenshot {
+    height: 70px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .menudiv {
+    margin-right: 15px;
+  }
+
+  .content {
+    margin-top: 120px;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .pagetitle {
+    font-size: 40px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .bluelink {
+    font-size: 18px;
+  }
+
+  .footerlink {
+    height: 45px;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .link {
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: var(--footer-text);
+  }
+
+  .footer {
+    height: auto;
+    padding-bottom: 20px;
+  }
+}
