@@ -738,3 +738,73 @@ body {
     padding-bottom: 20px;
   }
 }
+/* =====================
+   SEARCH BAR
+   ===================== */
+
+/* .search-wrap is the pill-shaped container holding the icon, input, and clear button */
+/* margin-bottom adds space between the search bar and the first article card */
+.search-wrap {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 50px;
+  padding: 10px 18px;
+  margin-bottom: 30px;
+  gap: 10px;
+  transition: border-color 0.2s ease;
+}
+
+/* Highlights the border orange when the search input is focused */
+.search-wrap:focus-within {
+  border-color: rgb(255, 95, 37);
+}
+
+/* .search-icon is the magnifying glass emoji to the left of the input */
+.search-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* .search-input is the actual text input field */
+/* flex: 1 makes it fill all available space between the icon and the clear button */
+/* border: none + outline: none removes the default browser input styling */
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  font-family: "Montserrat";
+  background: transparent;
+  color: black;
+}
+
+/* Placeholder text color */
+.search-input::placeholder {
+  color: rgb(180, 180, 180);
+}
+
+/* .search-clear is the × button that appears when there is text in the search field */
+/* display: none by default — shown by JS when the input has content */
+/* display: flex centers the × character inside the button */
+.search-clear {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: rgb(160, 160, 160);
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+/* Darkens the × when hovered */
+.search-clear:hover {
+  color: rgb(60, 60, 60);
+}
