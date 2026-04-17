@@ -5,51 +5,52 @@
    THEME VARIABLES
    ===================== */
 
-/* Light theme (default) */
 :root {
-  --bg:            rgb(250, 250, 250);
-  --text-primary:  rgb(0, 0, 0);
-  --text-title:  rgb(255, 255, 255);
-  --text-body:     rgb(255, 68, 0);
-  --topbar-bg:     rgb(36, 36, 36);
-  --footer-bg:     rgb(36, 36, 36);
-  --footer-text:   rgb(255, 255, 255);
-  --logo-bg:       black;
+  --bg:           rgb(250, 250, 250);
+  --text-primary: rgb(0, 0, 0);
+  --text-title:   rgb(255, 255, 255);
+  --text-body:    rgb(255, 68, 0);
+  --topbar-bg:    rgb(36, 36, 36);
+  --footer-bg:    rgb(36, 36, 36);
+  --footer-text:  rgb(255, 255, 255);
+  --logo-bg:      black;
+  --card-bg:      rgb(255, 255, 255);
+  --card-border:  rgb(220, 220, 220);
+  --card-desc:    rgb(80, 80, 80);
+  --card-count:   rgb(160, 160, 160);
 }
 
-/* Dark theme — applied when <body> has class "dark" */
 body.dark {
-  --bg:            rgb(18, 18, 18);
-  --text-primary:  rgb(255, 255, 255);
-  --text-title:  rgb(255, 255, 255);
-  --text-body:     rgb(255, 100, 50);
-  --topbar-bg:     rgb(80, 80, 80);
-  --footer-bg:     rgb(80, 80, 80);
-  --footer-text:   rgb(255, 255, 255);
-  --logo-bg:       rgb(10, 10, 10);
+  --bg:           rgb(18, 18, 18);
+  --text-primary: rgb(255, 255, 255);
+  --text-title:   rgb(255, 255, 255);
+  --text-body:    rgb(255, 100, 50);
+  --topbar-bg:    rgb(80, 80, 80);
+  --footer-bg:    rgb(80, 80, 80);
+  --footer-text:  rgb(255, 255, 255);
+  --logo-bg:      rgb(10, 10, 10);
+  --card-bg:      rgb(30, 30, 30);
+  --card-border:  rgb(55, 55, 55);
+  --card-desc:    rgb(190, 190, 190);
+  --card-count:   rgb(120, 120, 120);
 }
 
-/* Sets "Montserrat" as the default font for every element on the page */
-* {
-  font-family: "Montserrat";
-}
+* { font-family: "Montserrat"; }
 
-/* Removes default browser spacing and sets the background to near-white */
 body {
   margin: 0;
   padding: 0;
   background-color: var(--bg);
+  transition: background-color 0.3s ease;
 }
 
+/* =====================
+   TOPBAR
+   ===================== */
 
-/* .topbar is the navigation bar pinned to the top of the screen */
-/* Standard across all pages — see Home.css for detailed comments */
 .topbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,43 +58,42 @@ body {
   padding: 20px;
   height: 80px;
   z-index: 100;
+  transition: background-color 0.3s ease;
 }
 
-/* .logo holds the team logo image on the left side of the topbar */
 .logo {
   display: flex;
   margin-left: 15%;
   margin-right: auto;
 }
 
-/* .screenshot is the team logo image inside .logo */
 .screenshot {
   height: 120px;
   display: block;
   background-color: var(--logo-bg);
 }
 
-/* .midtext is the container for the team name centered in the topbar */
 .midtext {
   position: absolute;
-  margin-right: auto;
-  margin-left: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 40%;
+  text-align: center;
+  pointer-events: none;
 }
 
-/* .title is the "Bear Metal Team 3606" text inside .midtext */
 .title {
   font-size: 40px;
   font-weight: 500;
   color: white;
+  overflow: hidden;
 }
 
-/* .menudiv wraps the hamburger button and .dropdown on the right side of the topbar */
 .menudiv {
   position: relative;
   margin-right: 40px;
 }
 
-/* .menu is the hamburger button */
 .menu {
   display: flex;
   flex-direction: column;
@@ -106,31 +106,19 @@ body {
   padding: 0;
 }
 
-/* Each span is one of the three horizontal bars of the hamburger icon */
 .menu span {
   display: block;
   width: 100%;
   height: 4px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
-/* When Menu.js adds "open" to .menu, the bars animate into an X shape */
-.menu.open span:nth-child(1) {
-  transform: translateY(11px) rotate(45deg);
-}
+.menu.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+.menu.open span:nth-child(2) { opacity: 0; }
+.menu.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
 
-.menu.open span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu.open span:nth-child(3) {
-  transform: translateY(-11px) rotate(-45deg);
-}
-
-/* .dropdown is the nav menu shown when the hamburger is clicked */
-/* Standard across all pages — see Home.css for detailed comments */
 .dropdown {
   position: absolute;
   top: calc(100% + 24px);
@@ -141,7 +129,6 @@ body {
   flex-direction: column;
   z-index: 200;
   border-radius: 5px;
-  /* Animation properties */
   display: flex;
   opacity: 0;
   pointer-events: none;
@@ -149,20 +136,12 @@ body {
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* Rounds the bottom corners of the last .droplink */
-.droplink:last-child {
-  border-radius: 0 0 8px 8px;
-  border-bottom: none;
-}
-
-/* Shows the dropdown when Menu.js adds the "open" class */
 .dropdown.open {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-/* .droplink is the style for each nav link row inside .dropdown */
 .droplink {
   color: black;
   text-decoration: none;
@@ -175,19 +154,10 @@ body {
   position: relative;
 }
 
-/* Lightens the background of a .droplink when hovered */
-.droplink:hover {
-  background-color: rgb(255, 159, 124);
-}
+.droplink:last-child { border-radius: 0 0 8px 8px; border-bottom: none; }
+.droplink:hover { background-color: rgb(255, 159, 124); }
+.droplink.active { background-color: rgb(200, 60, 10); cursor: default; pointer-events: none; }
 
-/* .droplink.active highlights the current page's link */
-.droplink.active {
-  background-color: rgb(200, 60, 10);
-  cursor: default;
-  pointer-events: none;
-}
-
-/* .historymenu is the "History" row that contains .subdropdown */
 .historymenu {
   display: flex;
   align-items: center;
@@ -196,17 +166,9 @@ body {
   position: relative;
 }
 
-/* .arrow is the ▸ triangle icon that rotates when the submenu opens */
-.arrow {
-  transition: transform 0.2s ease;
-}
+.arrow { transition: transform 0.2s ease; }
+.historymenu.open .arrow { transform: rotate(90deg); }
 
-/* Rotates .arrow 90 degrees when .historymenu is open */
-.historymenu.open .arrow {
-  transform: rotate(90deg);
-}
-
-/* .subdropdown is the nested year list — see Home.css for detailed comments */
 .subdropdown {
   flex-direction: column;
   position: absolute;
@@ -219,40 +181,18 @@ body {
   max-height: 264px;
   overflow-y: auto;
   z-index: 300;
-  /* Animation properties */
   display: flex;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
 
-/* Custom scrollbar styling for .subdropdown — see Home.css for detailed comments */
-.subdropdown::-webkit-scrollbar {
-  width: 6px;
-}
+.subdropdown.open { opacity: 1; pointer-events: auto; }
+.subdropdown::-webkit-scrollbar { width: 6px; }
+.subdropdown::-webkit-scrollbar-track { background: rgb(255, 95, 37); border-radius: 10px; margin: 3px; }
+.subdropdown::-webkit-scrollbar-thumb { background: rgb(200, 60, 10); border-radius: 10px; }
+.subdropdown::-webkit-scrollbar-thumb:hover { background: black; }
 
-.subdropdown::-webkit-scrollbar-track {
-  background: rgb(255, 95, 37);
-  border-radius: 10px;
-  margin: 3px;
-}
-
-.subdropdown::-webkit-scrollbar-thumb {
-  background: rgb(200, 60, 10);
-  border-radius: 10px;
-}
-
-.subdropdown::-webkit-scrollbar-thumb:hover {
-  background: black;
-}
-
-/* Shows the subdropdown when Menu.js adds the "open" class */
-.subdropdown.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* .sublink is the style for each individual year link inside .subdropdown */
 .sublink {
   color: black;
   text-decoration: none;
@@ -262,16 +202,19 @@ body {
   transition: background-color 0.2s ease;
 }
 
-/* Lightens the background of a .sublink when hovered */
-.sublink:hover {
-  background-color: rgb(255, 159, 124);
+.sublink:hover { background-color: rgb(255, 159, 124); }
+
+.active {
+  background-color: rgb(200, 60, 10);
+  cursor: default;
+  pointer-events: none;
+  border-color: black;
 }
 
 /* =====================
-   THEME TOGGLE ROW
+   THEME TOGGLE
    ===================== */
- 
-/* The row inside the dropdown that holds the toggle switch */
+
 .theme-row {
   display: flex;
   align-items: center;
@@ -283,7 +226,7 @@ body {
   cursor: default;
   user-select: none;
 }
- 
+
 .theme-label {
   font-size: 16px;
   color: black;
@@ -292,23 +235,16 @@ body {
   align-items: center;
   gap: 6px;
 }
- 
-/* The toggle switch track */
+
 .toggle-switch {
   position: relative;
   width: 46px;
   height: 24px;
   flex-shrink: 0;
 }
- 
-/* Hide the real checkbox */
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
- 
-/* The visual slider track */
+
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+
 .toggle-track {
   position: absolute;
   inset: 0;
@@ -318,8 +254,7 @@ body {
   transition: background-color 0.3s ease;
   border: 1.5px solid rgba(0,0,0,0.3);
 }
- 
-/* The sliding circle (thumb) */
+
 .toggle-track::before {
   content: '';
   position: absolute;
@@ -333,143 +268,271 @@ body {
   transition: transform 0.3s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
- 
-/* When checked (dark mode), slide the thumb to the right and darken the track */
-.toggle-switch input:checked + .toggle-track {
-  background-color: rgba(0,0,0,0.55);
-}
- 
+
+.toggle-switch input:checked + .toggle-track { background-color: rgba(0,0,0,0.55); }
 .toggle-switch input:checked + .toggle-track::before {
   transform: translateY(-50%) translateX(22px);
   background-color: rgb(36, 36, 36);
 }
 
 /* =====================
-   GALLERY PAGE CONTENT
+   PAGE CONTENT
    ===================== */
 
-/* .content is the main body area below the topbar */
-/* Note: margin-top is 135px here (smaller than other pages) since the gallery
-   doesn't need as much space before the slideshow starts */
-/* display: flex + align-items: center stacks and centers the slideshow vertically */
 .content {
   margin-top: 135px;
-  margin-left: 10%;
-  margin-right: 10%;
-  color: var(--text-body);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 60px;
 }
 
-/* .pagetitle is the large "Gallery" heading at the top of the page */
 .pagetitle {
   font-size: 70px;
   text-align: center;
-  margin: 0px;
-  margin-bottom: 50px;
+  margin: 0 0 50px;
   color: var(--text-primary);
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 /* =====================
-   SLIDESHOW
+   YEAR GRID
    ===================== */
 
-/* .slideshow is the container for the entire slideshow widget */
-/* position: relative allows .slidecontrols and .slidecounter to be
-   absolutely positioned relative to the slideshow area */
-.slideshow {
+/* 2-column grid of year cards */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+/* Each card is a clickable box with image + info */
+.year-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+}
+
+.year-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+}
+
+/* Image wrapper — fixed aspect ratio so all cards are the same height */
+.year-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.year-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.year-card:hover .year-cover {
+  transform: scale(1.04);
+}
+
+/* Orange overlay that fades in on hover */
+.year-card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 95, 37, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.year-card:hover .year-card-overlay {
+  opacity: 1;
+}
+
+.year-card-view {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Text section below the image */
+.year-card-info {
+  padding: 20px 24px 22px;
+}
+
+.year-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+  transition: color 0.3s ease;
+}
+
+.year-desc {
+  font-size: 15px;
+  color: var(--card-desc);
+  margin: 0 0 8px;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.year-count {
+  font-size: 13px;
+  color: var(--card-count);
+  margin: 0;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* =====================
+   SLIDESHOW MODAL
+   ===================== */
+
+/* Full-screen dark backdrop */
+.slideshow-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.92);
+  z-index: 600;
+  align-items: center;
+  justify-content: center;
+}
+
+/* "open" class added by Gallery.js when a card is clicked */
+.slideshow-modal.open {
+  display: flex;
+}
+
+/* The inner box that holds everything */
+.modal-inner {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  position: relative;
+  gap: 16px;
 }
 
-/* .slidepic is the current slide photo */
-/* max-height caps the image height so very tall photos don't dominate the page */
-/* border-radius softly rounds the corners */
-.slidepic {
-  max-height: 650px;
+/* Top bar: year label + close button */
+.modal-topbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-year {
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 42px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.modal-close:hover { opacity: 1; }
+
+/* Image container */
+.modal-img-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-img {
+  max-height: 62vh;
+  max-width: 100%;
+  border-radius: 12px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Caption + counter row */
+.modal-info {
+  display: flex;
+  text-align: center;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.modal-title {
+  font-size: 18px;
+  color: rgb(230, 230, 230);
+  margin: 0;
+  flex: 1;
+}
+
+.modal-counter {
+  font-size: 16px;
+  color: rgb(160, 160, 160);
+  margin: 0;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 4px 14px;
   border-radius: 20px;
 }
 
-/* .slidetitle is the caption text displayed above the current slide photo */
-.slidetitle {
-  justify-self: center;
-  font-size: 23px;
-}
-
-/* .slidecontrols is the wrapper for the prev and next buttons */
-/* position: absolute + top: 50% + transform centers it vertically over the photo */
-/* width: 80% and justify-content: space-between pushes the buttons to opposite sides */
-.slidecontrols {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 90%;
+/* Prev / Next buttons */
+.modal-controls {
   display: flex;
-  justify-content: space-between;
-  padding: 0 16px;
-  box-sizing: border-box;
+  gap: 20px;
 }
 
-/* .prevbut and .nextbut are the left and right arrow navigation buttons */
-/* Semi-transparent orange background blends with the photo while still being visible */
-/* transition smoothly darkens the button on hover */
-.prevbut,
-.nextbut {
-  font-size: 40px;
-  width: 120px;
-  height: 90px;
-  border-radius: 16px;
+.modal-nav {
+  font-size: 28px;
+  width: 64px;
+  height: 52px;
+  border-radius: 12px;
   cursor: pointer;
-  border: 2px solid black;
-  background-color: rgba(255, 135, 91, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 135, 91, 0.4);
+  color: white;
   transition: background-color 0.2s ease;
 }
 
-/* Darkens the button background when hovered */
-.prevbut:hover,
-.nextbut:hover {
-  background-color: rgba(255, 135, 91, 0.85);
-}
-
-/* .slidecounter displays the "1 / 14" progress indicator */
-/* position: absolute + top: 90% places it near the bottom of the photo */
-/* left: 50% + transform: translateX(-50%) centers it horizontally */
-/* Semi-transparent dark pill background keeps it readable over any photo */
-.slidecounter {
-  position: absolute;
-  top: 90%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 22px;
+.modal-nav:hover {
+  background-color: rgba(255, 135, 91, 0.8);
 }
 
 /* =====================
    FOOTER
    ===================== */
 
-/* .footer is the dark bar at the bottom of the page */
-/* margin-top adds space between the slideshow and the footer */
-/* Standard across all pages — see Home.css for detailed comments */
 .footer {
   display: block;
   align-content: center;
   justify-items: center;
   background: var(--footer-bg);
   padding: 20px;
-  margin-top: 50px;
   height: 200px;
+  transition: background-color 0.3s ease;
 }
 
-/* .topbit holds the row of external organization logo links */
 .topbit {
   flex: 1;
   margin-left: 20px;
@@ -479,7 +542,6 @@ body {
   align-content: center;
 }
 
-/* .footerlink is each logo image inside .topbit */
 .footerlink {
   height: 80px;
   border-radius: 40px;
@@ -487,97 +549,57 @@ body {
   margin-right: 15px;
 }
 
-/* .bottombit holds the Contact Us and Support Us text links */
 .bottombit {
   display: block;
   margin-top: 20px;
 }
 
-/* .link is each text link inside .bottombit */
 .link {
   margin-left: 20px;
   margin-right: 20px;
   font-size: 25px;
-  color: var(--footer-text);;
+  color: var(--footer-text);
+  transition: color 0.3s ease;
 }
 
-/* .copyright is the copyright line at the bottom of the footer */
 .copyright {
   color: var(--footer-text);
+  transition: color 0.3s ease;
 }
 
-/* .active highlights the current page's link in the .dropdown */
-/* pointer-events: none disables clicking since you're already on that page */
-.active {
-  background-color: rgb(200, 60, 10);
-  cursor: default;
-  pointer-events: none;
-  border-color: rgb(0, 0, 0)
-}
+/* =====================
+   RESPONSIVE
+   ===================== */
 
 @media (max-width: 768px) {
-  .logo {
-    margin-left: 20px;
-  }
+  .logo { margin-left: 20px; }
+  .screenshot { height: 70px; }
+  .title { font-size: 20px; }
   .midtext { max-width: 35%; }
-  .screenshot {
-    height: 70px;
-  }
-
-  .title {
-    font-size: 20px;
-  }
-
-  .menudiv {
-    margin-right: 15px;
-  }
+  .menudiv { margin-right: 15px; }
 
   .content {
     margin-top: 120px;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 4%;
+    margin-right: 4%;
   }
 
-  .pagetitle {
-    font-size: 40px;
+  .pagetitle { font-size: 40px; }
+
+  /* Single column on mobile */
+  .year-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .slidepic {
-  max-width: 350px;
-  border-radius: 20px;
-  display: block;
-  margin: 0 auto;
-  }
+  .year-title { font-size: 24px; }
 
-  .slidetitle {
-    font-size: 15px;
-  }
+  .modal-year { font-size: 18px; }
+  .modal-title { font-size: 14px; }
+  .modal-img { max-height: 50vh; }
+  .modal-nav { width: 48px; height: 42px; font-size: 20px; }
 
-  .prevbut,
-  .nextbut {
-    width: 60px;
-    height: 55px;
-    font-size: 24px;
-  }
-
-  .slidecontrols {
-    width: 95%;
-  }
-
-  .footerlink {
-    height: 45px;
-    margin-left: 6px;
-    margin-right: 6px;
-  }
-
-  .link {
-    font-size: 16px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  .footer {
-    height: auto;
-    padding-bottom: 20px;
-  }
+  .footerlink { height: 45px; margin-left: 6px; margin-right: 6px; }
+  .link { font-size: 16px; margin-left: 10px; margin-right: 10px; }
+  .footer { height: auto; padding-bottom: 20px; }
 }
