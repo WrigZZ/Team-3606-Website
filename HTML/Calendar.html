@@ -178,7 +178,7 @@
       appId: "1:693146086909:web:33e29afe52ebf239eb7d94"
     };
 
-    const PASSCODE = "863759";
+    const DATA = "863759";
 
     const app = initializeApp(firebaseConfig);
     const db  = getFirestore(app);
@@ -274,7 +274,7 @@
 
     document.getElementById("passcode-submit").onclick = () => {
       const input = document.getElementById("passcode-input").value;
-      if (input === PASSCODE) {
+      if (input === DATA) {
         document.getElementById("passcode-overlay").style.display = "none";
         openAdmin();
       } else {

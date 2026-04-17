@@ -3,15 +3,11 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Ensures the page scales correctly on mobile devices -->
   <title>Gallery</title>
-  <!-- Title changes what shows up in the tab section -->
   <link rel="stylesheet" href="/BearMetal Website/CSS/Gallery.css">
-  <!-- Links the CSS file that styles this page -->
   <link rel="icon" type="image/png" href="/BearMetal Website/Gallery/Other/Favicon.png">
-  <!-- Sets the small icon shown in the browser tab -->
   <meta property="og:title" content="Gallery - Bear Metal Team 3606">
-  <meta property="og:description" content="Photos from Bear Metal Team 3606's 2026 season.">
+  <meta property="og:description" content="Photos from Bear Metal Team 3606's seasons.">
   <meta property="og:image" content="https://bearmetal3606.com/Gallery/2026/2026Team2.jpeg">
   <meta property="og:url" content="https://bearmetal3606.com/Gallery.html">
   <meta property="og:type" content="website">
@@ -19,21 +15,16 @@
 
 <body>
 
-  <!-- Standard topbar and nav menu — see Home.html for detailed comments -->
-  <!-- class="active" is on Gallery since this is the current page -->
+  <!-- Standard topbar -->
   <nav class="topbar">
     <div class="logo">
       <a href="/BearMetal Website/HTML/Home.html">
         <img src="/BearMetal Website/Gallery/Other/3606Logo.png" alt="Logo" class="screenshot" id="screenshot">
       </a>
     </div>
-
     <div class="midtext">
-      <p class="title">
-        Bear Metal Team 3606
-      </p>
+      <p class="title">Bear Metal Team 3606</p>
     </div>
-
     <div class="menudiv">
       <button class="menu" id="menu">
         <span></span>
@@ -48,7 +39,7 @@
         <a href="/BearMetal Website/HTML/News.html" class="droplink">News</a>
         <a href="/BearMetal Website/HTML/Calendar.html" class="droplink">Calendar</a>
         <div class="droplink historymenu" id="history-btn">
-          History <span class="arrow">&#129030</span>
+          History <span class="arrow">&#129030;</span>
           <div class="subdropdown" id="subdropdown">
             <a href="/BearMetal Website/YearsHTML/2026.html" class="sublink">2026</a>
             <a href="/BearMetal Website/YearsHTML/2025.html" class="sublink">2025</a>
@@ -68,19 +59,12 @@
             <a href="/BearMetal Website/YearsHTML/2011.html" class="sublink">2011</a>
           </div>
         </div>
-        <!-- =====================
-             THEME TOGGLE ROW
-             Last item in the dropdown — rounded bottom corners from .theme-row in CSS
-             Clicking the switch toggles dark mode on <body> and saves the preference
-             ===================== -->
         <div class="theme-row" id="theme-row">
           <span class="theme-label">
-            <!-- Sun icon for light, moon for dark — swapped by JS -->
             <span id="theme-icon"></span>
             <span id="theme-text">Light Mode</span>
           </span>
           <label class="toggle-switch" title="Toggle dark mode">
-            <!-- The checkbox drives the CSS toggle via :checked -->
             <input type="checkbox" id="theme-toggle">
             <span class="toggle-track"></span>
           </label>
@@ -89,63 +73,52 @@
     </div>
   </nav>
 
-  <!-- .content is the main body section of the Gallery page -->
+  <!-- Main content -->
   <div class="content">
+    <p class="pagetitle">Gallery</p>
 
-    <!-- .pagetitle is the large "Gallery" heading at the top of the page -->
-    <p class="pagetitle">
-      Gallery
-    </p>
+    <!-- Gallery.js fills this grid with one card per year -->
+    <div class="year-grid" id="year-grid"></div>
+  </div>
 
-    <!-- ==================== SLIDESHOW ==================== -->
-    <!-- .slideshow is the container for the entire slideshow widget -->
-    <div class="slideshow">
 
-      <!-- .slidepicwrapper wraps the caption and photo together so they stay grouped -->
-      <div class="slidepicwrapper">
+  <!-- ==================== SLIDESHOW MODAL ==================== -->
+  <!-- Hidden by default. Gallery.js adds class "open" when a year card is clicked. -->
+  <div class="slideshow-modal" id="slideshow-modal">
+    <div class="modal-inner">
 
-        <!-- .slidetitle is the caption for the current slide -->
-        <!-- id="slide-title" is updated by Gallery.js when the slide changes -->
-        <!-- The initial text here matches the first slide in the Gallery.js slides array -->
-        <p class="slidetitle" id="slide-title">Working on the Robot at 2026 Competition 1</p>
-
-        <!-- .slidepic is the current slide photo -->
-        <!-- id="slide-img" is updated by Gallery.js when the slide changes -->
-        <!-- src points to the first image in the Gallery.js slides array -->
-        <!-- Update src if the first slide image changes -->
-        <img class="slidepic" id="slide-img" src="/BearMetal Website/Gallery/2026/2026WorkComp1.jpg" alt="slide">
-
+      <!-- Top bar: year label on the left, close button on the right -->
+      <div class="modal-topbar">
+        <p class="modal-year" id="modal-year"></p>
+        <button class="modal-close" id="modal-close">&times;</button>
       </div>
-      <!-- End .slidepicwrapper -->
 
-      <!-- .slidecounter displays the current slide number, e.g. "1 / 12" -->
-      <!-- id="slide-counter" is updated by Gallery.js when the slide changes -->
-      <!-- The initial text here should match the total number of slides in Gallery.js -->
-      <p class="slidecounter" id="slide-counter">1 / 12</p>
-
-      <!-- .slidecontrols holds the previous and next navigation buttons -->
-      <div class="slidecontrols">
-
-        <!-- .prevbut goes to the previous slide — id="prev" is used by Gallery.js -->
-        <button class="prevbut" id="prev">&larr;</button>
-
-        <!-- .nextbut goes to the next slide — id="next" is used by Gallery.js -->
-        <button class="nextbut" id="next">&rarr;</button>
-
+      <!-- The slide image -->
+      <div class="modal-img-wrap">
+        <img class="modal-img" id="modal-img" src="" alt="slide">
       </div>
-      <!-- End .slidecontrols -->
+
+      <!-- Caption and counter below the image -->
+      <div class="modal-info">
+        <p class="modal-title" id="modal-title"></p>
+        </div>
+        <div>
+        <p class="modal-counter" id="modal-counter"></p>
+      </div>
+
+      <!-- Prev / Next navigation -->
+      <div class="modal-controls">
+        <button class="modal-nav" id="modal-prev">&larr;</button>
+        <button class="modal-nav" id="modal-next">&rarr;</button>
+      </div>
 
     </div>
-    <!-- End .slideshow -->
-
   </div>
-  <!-- End .content -->
+  <!-- End slideshow modal -->
 
 
-  <!-- Standard footer — see Home.html for detailed comments -->
+  <!-- Standard footer -->
   <div class="footer">
-
-    <!-- .topbit holds the row of external organization logo links -->
     <div class="topbit">
       <a href="https://www.firstinspires.org/" target="_blank">
         <img src="/BearMetal Website/Gallery/Other/FirstLogo.png" alt="FIRST" class="footerlink">
@@ -163,11 +136,7 @@
         <img src="/BearMetal Website/Gallery/Other/GithubLogo.png" alt="Web Code" class="footerlink">
       </a>
     </div>
-    <!-- End .topbit -->
-
-    <!-- .bottombit holds the Contact Us and Support Us links -->
     <div class="bottombit">
-      <!-- Each link opens a Google Form in a new tab -->
       <a target="_blank"
         href="https://docs.google.com/forms/d/e/1FAIpQLSf-ARXAgibs5XYvToSkP_Xz5c5w89AbsWZ_nEj2urVqudIYmw/viewform?usp=publish-editor"
         class="link">Contact Us</a>
@@ -175,23 +144,11 @@
         href="https://docs.google.com/forms/d/e/1FAIpQLSd3Ozljtnx2aHu-FZ0SQ16fMAEZm4VjGRfBngM0sldzolF4mw/viewform?usp=publish-editor"
         class="link">Support Us</a>
     </div>
-    <!-- End .bottombit -->
-
-    <!-- .copyright displays the copyright notice at the bottom of the footer -->
-    <!-- Update the year each season -->
     <div class="copyright">
-      <p>
-        &copy; 2026 Bear Metal Team 3606
-      </p>
+      <p>&copy; 2026 Bear Metal Team 3606</p>
     </div>
-    <!-- End .copyright -->
-
   </div>
-  <!-- End .footer -->
 
-  <!-- Gallery.js controls the slideshow logic (slide switching, counter updates) -->
-  <!-- Menu.js handles the hamburger menu and History submenu logic -->
-  <!-- Both script tags go at the end of the body so the HTML loads before the JS runs -->
   <script src="/BearMetal Website/JS/Gallery.js"></script>
   <script src="/BearMetal Website/JS/Menu.js"></script>
 
