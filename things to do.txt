@@ -1,2 +1,1 @@
-Gallery filtering by year
 Search bar on news
