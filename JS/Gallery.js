@@ -1,61 +1,149 @@
-// Grab the slideshow elements from the HTML by their IDs
+// ==================== YEAR DATA ====================
+// Each entry is one year card on the gallery grid.
+// - year:        shown as the card title
+// - description: shown as the card subtitle
+// - cover:       the image shown on the grid card itself
+// - slides:      array of { title, src } shown in the slideshow when the card is clicked
+//
+// To add a new year: add a new object to the top of this array.
+// To add photos to a year: add { title: "...", src: "..." } entries to that year's slides array.
 
-const img = document.getElementById('slide-img');
-// "slide-img" is the <img> element that displays the current slide photo
-
-const title = document.getElementById('slide-title');
-// "slide-title" is the element that displays the caption/title of the current slide
-
-const counter = document.getElementById('slide-counter');
-// "slide-counter" is the element that displays "1 / ..." style progress text
-
-// Allows using the left and right arrow keys to navigate the slideshow
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') go(cur - 1);
-  if (e.key === 'ArrowRight') go(cur + 1);
-});
-
-// slides is the array of all photos in the slideshow
-// Each object has a title (caption) and src (path to the image file)
-// To add a new photo: add a new { title: "...", src: "..." } entry to this array
-// To remove a photo: delete its entry from this array
-const slides = [
-  { title: "Working on the Robot at 2026 Competition 1", src: "/BearMetal Website/Gallery/2026/2026WorkComp1.jpg" },
-  { title: "Working on the Robot at 2026 Competition 2", src: "/BearMetal Website/Gallery/2026/2026WorkComp2.jpg" },
-  { title: "Working on the Robot at 2026 Competition 3", src: "/BearMetal Website/Gallery/2026/2026WorkComp3.jpg" },
-  { title: "Working on the Robot at 2026 Competition 4", src: "/BearMetal Website/Gallery/2026/2026WorkComp4.jpg" },
-  { title: "Working on the Robot at 2026 Competition 5", src: "/BearMetal Website/Gallery/2026/2026WorkComp5.jpg" },
-  { title: "Working on the 2026 Robot", src: "/BearMetal Website/Gallery/2026/2026WorkHome.jpg" },
-  { title: "2026 FRC Team 1", src: "/BearMetal Website/Gallery/2026/2026Team1.jpg" },
-  { title: "2026 FRC Team 2", src: "/BearMetal Website/Gallery/2026/2026Team2.jpg" },
-  { title: "2026 Rebuilt Match", src: "/BearMetal Website/Gallery/2026/2026Play.jpg" },
-  { title: "2026 Bumpers", src: "/BearMetal Website/Gallery/2026/2026Bumpers.jpg" },
-  { title: "2026 Bot 1", src: "/BearMetal Website/Gallery/2026/2026Bot1.jpg" },
-  { title: "2026 Bot 2", src: "/BearMetal Website/Gallery/2026/2026Bot2.jpg" },
+const years = [
+  {
+    year: "2026",
+    description: "REBUILT presented by Haas",
+    cover: "/BearMetal Website/Gallery/2026/2026Bot1.jpg",
+    slides: [
+      { title: "Working on the Robot at 2026 Competition 1", src: "/BearMetal Website/Gallery/2026/2026WorkComp1.jpg" },
+      { title: "Working on the Robot at 2026 Competition 2", src: "/BearMetal Website/Gallery/2026/2026WorkComp2.jpg" },
+      { title: "Working on the Robot at 2026 Competition 3", src: "/BearMetal Website/Gallery/2026/2026WorkComp3.jpg" },
+      { title: "Working on the Robot at 2026 Competition 4", src: "/BearMetal Website/Gallery/2026/2026WorkComp4.jpg" },
+      { title: "Working on the Robot at 2026 Competition 5", src: "/BearMetal Website/Gallery/2026/2026WorkComp5.jpg" },
+      { title: "Working on the 2026 Robot", src: "/BearMetal Website/Gallery/2026/2026WorkHome.jpg" },
+      { title: "2026 FRC Team 1", src: "/BearMetal Website/Gallery/2026/2026Team1.jpg" },
+      { title: "2026 FRC Team 2", src: "/BearMetal Website/Gallery/2026/2026Team2.jpg" },
+      { title: "2026 Rebuilt Match", src: "/BearMetal Website/Gallery/2026/2026Play.jpg" },
+      { title: "2026 Bumpers", src: "/BearMetal Website/Gallery/2026/2026Bumpers.jpg" },
+      { title: "2026 Bot 1", src: "/BearMetal Website/Gallery/2026/2026Bot1.jpg" },
+      { title: "2026 Bot 2", src: "/BearMetal Website/Gallery/2026/2026Bot2.jpg" },
+    ]
+  },
+  // Add more years - Newest on top
+  {
+    year: "2025",
+    description: "REEFSCAPE presented by Haas",
+    cover: "/BearMetal Website/Gallery/2025/2025Bot.jpg",
+    slides: [
+      { title: "2025 Reefscape Team", src: "/BearMetal Website/Gallery/2025/2025Team.jpg" },
+      { title: "2025 Bot", src: "/BearMetal Website/Gallery/2025/2025Bot.jpg" },
+      { title: "Working on the Robot at 2025 Competition 1", src: "/BearMetal Website/Gallery/2025/2025Comp1.jpg" },
+      { title: "Working on the Robot at 2025 Competition 2", src: "/BearMetal Website/Gallery/2025/2025Comp2.jpg" },
+      { title: "Working on the Robot at 2025 Competition 3", src: "/BearMetal Website/Gallery/2025/2025Comp3.jpg" },
+    ]
+  },
+  {
+    year: "2024",
+    description: "Crescendo presented by Haas",
+    cover: "/BearMetal Website/Gallery/2024/2024Bot.jpg",
+    slides: [
+      { title: "2024 Bot", src: "/BearMetal Website/Gallery/2024/2024Bot.jpg" },
+      { title: "Testing the robot 2024", src: "/BearMetal Website/Gallery/2024/2024TestDrive.jpg" },
+    ]
+  },
 ];
 
-// cur tracks the index of the currently displayed slide (starts at 0 = first slide)
-let cur = 0;
+// ==================== GRID ====================
 
-// go() is the function that switches the slideshow to a specific slide by index (n)
-function go(n) {
-  cur = (n + slides.length) % slides.length;
-  // The modulo (%) wraps around — if you go past the last slide it loops back to the first,
-  // and if you go before the first slide it loops back to the last
+const grid = document.getElementById('year-grid');
 
-  img.src = slides[cur].src;
-  // Updates the image to the src path of the new current slide
+// Build a card for each year and append it to the grid
+years.forEach((yearData, index) => {
+  const card = document.createElement('div');
+  card.className = 'year-card';
 
-  title.textContent = slides[cur].title;
-  // Updates the caption text to the title of the new current slide
+  card.innerHTML = `
+    <div class="year-card-img-wrap">
+      <img class="year-cover" src="${yearData.cover}" alt="${yearData.year} season photo">
+      <div class="year-card-overlay">
+        <span class="year-card-view">View Photos ›</span>
+      </div>
+    </div>
+    <div class="year-card-info">
+      <p class="year-title">${yearData.year}</p>
+      <p class="year-desc">${yearData.description}</p>
+      <p class="year-count">${yearData.slides.length} photo${yearData.slides.length !== 1 ? 's' : ''}</p>
+    </div>
+  `;
 
-  counter.textContent = `${cur + 1} / ${slides.length}`;
-  // Updates the counter text, e.g. "3 / 14"
-  // cur + 1 because arrays start at 0 but we want to show "1" for the first slide
+  // Clicking the card opens the modal slideshow for this year
+  card.addEventListener('click', () => openModal(index));
+
+  grid.appendChild(card);
+});
+
+// ==================== MODAL SLIDESHOW ====================
+
+const modal = document.getElementById('slideshow-modal');
+const modalImg = document.getElementById('modal-img');
+const modalTitle = document.getElementById('modal-title');
+const modalYear = document.getElementById('modal-year');
+const modalCount = document.getElementById('modal-counter');
+const closeBtn = document.getElementById('modal-close');
+const prevBtn = document.getElementById('modal-prev');
+const nextBtn = document.getElementById('modal-next');
+
+let activeSlides = [];  // slides array for the currently open year
+let cur = 0;   // current slide index
+
+// openModal loads the slides for the clicked year and shows the modal
+function openModal(yearIndex) {
+  const yearData = years[yearIndex];
+  activeSlides = yearData.slides;
+  cur = 0;
+
+  modalYear.textContent = yearData.year + ' Season';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden'; // prevent background scroll
+
+  renderSlide();
 }
 
-// When the prev button is clicked, go to the previous slide (cur - 1)
-document.getElementById('prev').onclick = () => go(cur - 1);
+// renderSlide updates the image, caption and counter for the current slide
+function renderSlide() {
+  const slide = activeSlides[cur];
+  modalImg.src = slide.src;
+  modalImg.alt = slide.title;
+  modalTitle.textContent = slide.title;
+  modalCount.textContent = `${cur + 1} / ${activeSlides.length}`;
+}
 
-// When the next button is clicked, go to the next slide (cur + 1)
-document.getElementById('next').onclick = () => go(cur + 1);
+// go() advances to slide index n, wrapping around at both ends
+function go(n) {
+  cur = (n + activeSlides.length) % activeSlides.length;
+  renderSlide();
+}
+
+prevBtn.onclick = () => go(cur - 1);
+nextBtn.onclick = () => go(cur + 1);
+
+// Close the modal
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  modalImg.src = ''; // release the image so it doesn't linger in memory
+}
+
+closeBtn.onclick = closeModal;
+
+// Click the dark backdrop (outside the modal box) to close
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
+
+// Arrow key navigation while the modal is open
+document.addEventListener('keydown', (e) => {
+  if (!modal.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') go(cur - 1);
+  if (e.key === 'ArrowRight') go(cur + 1);
+  if (e.key === 'Escape') closeModal();
+});
