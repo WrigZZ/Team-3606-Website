@@ -18,6 +18,7 @@
   <nav class="topbar">
     <div class="logo">
       <a href="/BearMetal Website/HTML/Home.html">
+        <!-- id="screenshot" is required by Menu.js for the dark/light mode logo swap -->
         <img src="/BearMetal Website/Gallery/Other/3606Logo.png" alt="Logo" class="screenshot" id="screenshot">
       </a>
     </div>
@@ -35,6 +36,7 @@
         <a href="/BearMetal Website/HTML/Sponsors.html" class="droplink">Sponsors</a>
         <a href="/BearMetal Website/HTML/ThisSeason.html" class="droplink">This Season</a>
         <a href="/BearMetal Website/HTML/Gallery.html" class="droplink">Gallery</a>
+        <!-- class="active" highlights News since this is the current page -->
         <a href="/BearMetal Website/HTML/News.html" class="droplink active">News</a>
         <a href="/BearMetal Website/HTML/Calendar.html" class="droplink">Calendar</a>
         <div class="droplink historymenu" id="history-btn">
@@ -60,7 +62,7 @@
         </div>
         <div class="theme-row" id="theme-row">
           <span class="theme-label">
-            <span id="theme-icon">☀️</span>
+            <span id="theme-icon">&#9728;&#65039;</span>
             <span id="theme-text">Light Mode</span>
           </span>
           <label class="toggle-switch" title="Toggle dark mode">
@@ -73,15 +75,39 @@
   </nav>
 
   <div class="content">
+
     <p class="pagetitle">News</p>
+
+    <!-- ==================== SEARCH BAR ==================== -->
+    <!-- .search-wrap is the container for the search input and icon -->
+    <!-- Typing in this field filters .news-container in real time via JS -->
+    <div class="search-wrap">
+      <span class="search-icon">&#128269;</span>
+      <input
+        type="text"
+        class="search-input"
+        id="search-input"
+        placeholder="Search articles..."
+        autocomplete="off"
+      >
+      <!-- Clear button — only visible when there is text in the search field -->
+      <!-- Clicking it clears the search and shows all articles again -->
+      <button class="search-clear" id="search-clear" style="display:none;">&#x2715;</button>
+    </div>
+
+    <!-- .news-container is where article cards are rendered by JS -->
+    <!-- Filtered in real time when the user types in the search bar -->
     <div class="news-container" id="news-container">
       <p class="loading-msg" id="loading-msg">Loading articles...</p>
     </div>
+
+    <!-- Edit button: clicking this prompts for the passcode -->
     <button class="edit-btn" id="edit-btn">&#9998; Edit</button>
+
   </div>
 
 
-  <!-- PASSCODE MODAL -->
+  <!-- ==================== PASSCODE MODAL ==================== -->
   <div class="overlay" id="passcode-overlay">
     <div class="modal-box">
       <p class="modal-title">Enter Passcode</p>
@@ -96,7 +122,7 @@
   </div>
 
 
-  <!-- ADMIN MODAL -->
+  <!-- ==================== ADMIN MODAL ==================== -->
   <div class="overlay" id="admin-overlay">
     <div class="modal-box admin-box">
       <p class="modal-title">Edit News</p>
@@ -116,6 +142,7 @@
   </div>
 
 
+  <!-- Standard footer -->
   <div class="footer">
     <div class="topbit">
       <a href="https://www.firstinspires.org/" target="_blank">
@@ -148,15 +175,9 @@
   </div>
 
 
+  <!-- ==================== FIREBASE + NEWS LOGIC ==================== -->
   <script type="module">
 
-    // BUG FIX: The old imports used npm-style paths ("firebase/app", "firebase/analytics")
-    // which only work in a Node.js build environment, not in a plain browser script tag.
-    // All Firebase imports must use the full CDN URLs shown below.
-    // The old script was also missing ALL of the Firestore imports (getFirestore, collection,
-    // addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy) — they were used
-    // but never imported, so the entire script crashed on load and showed "Loading articles..."
-    // forever.
     import { initializeApp }
       from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy }
@@ -171,37 +192,48 @@
       appId: "1:693146086909:web:33e29afe52ebf239eb7d94"
     };
 
+    // *** Change this to your 6-digit passcode ***
     const DATA = "863759";
 
     const app = initializeApp(firebaseConfig);
     const db  = getFirestore(app);
 
+    // articles holds the full unfiltered list fetched from Firestore
     let articles = [];
 
-    // Fetch articles from Firestore ordered newest first
+    // ==================== FETCH FROM FIRESTORE ====================
+
     async function loadArticles() {
       try {
         const q        = query(collection(db, "news_articles"), orderBy("timestamp", "desc"));
         const snapshot = await getDocs(q);
         articles = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-        renderArticles();
+        renderArticles(articles);
       } catch (err) {
         console.error("Failed to load articles:", err);
         document.getElementById("loading-msg").textContent = "Failed to load articles: " + err.message;
       }
     }
 
-    function renderArticles() {
+    // ==================== RENDER ARTICLES ====================
+
+    // renderArticles accepts a subset of articles to display
+    // This allows the search filter to pass a filtered array without touching the full list
+    function renderArticles(list) {
       const container = document.getElementById("news-container");
       document.getElementById("loading-msg")?.remove();
       container.innerHTML = "";
 
-      if (articles.length === 0) {
-        container.innerHTML = "<p class='no-articles-msg'>No articles yet. Check back soon!</p>";
+      if (list.length === 0) {
+        // Different message depending on whether a search is active or there are simply no articles
+        const searchVal = document.getElementById("search-input").value.trim();
+        container.innerHTML = searchVal
+          ? `<p class='no-articles-msg'>No articles match "<strong>${searchVal}</strong>".</p>`
+          : "<p class='no-articles-msg'>No articles yet. Check back soon!</p>";
         return;
       }
 
-      articles.forEach(article => {
+      list.forEach(article => {
         const card = document.createElement("div");
         card.className = "news-card";
 
@@ -227,7 +259,44 @@
       });
     }
 
-    // Passcode modal
+    // ==================== SEARCH ====================
+
+    const searchInput = document.getElementById("search-input");
+    const searchClear = document.getElementById("search-clear");
+
+    // Filter articles in real time as the user types
+    // Matches against the article title and description (case-insensitive)
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+
+      // Show or hide the clear button depending on whether there is text
+      searchClear.style.display = query ? "flex" : "none";
+
+      if (!query) {
+        // Empty search — show all articles
+        renderArticles(articles);
+        return;
+      }
+
+      // Filter to articles where the title OR description contains the search text
+      const filtered = articles.filter(a =>
+        a.title.toLowerCase().includes(query) ||
+        a.description.toLowerCase().includes(query)
+      );
+
+      renderArticles(filtered);
+    });
+
+    // Clear button resets the search input and shows all articles again
+    searchClear.addEventListener("click", () => {
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      renderArticles(articles);
+      searchInput.focus();
+    });
+
+    // ==================== PASSCODE FLOW ====================
+
     document.getElementById("edit-btn").onclick = () => {
       document.getElementById("passcode-overlay").style.display = "flex";
       document.getElementById("passcode-input").value           = "";
@@ -252,7 +321,8 @@
       if (e.key === "Enter") document.getElementById("passcode-submit").click();
     });
 
-    // Admin modal
+    // ==================== ADMIN GUI ====================
+
     function openAdmin() {
       document.getElementById("admin-overlay").style.display = "flex";
       renderAdminList();
@@ -295,7 +365,11 @@
           try {
             await deleteDoc(doc(db, "news_articles", article.id));
             articles = articles.filter(a => a.id !== article.id);
-            renderArticles();
+            // Re-apply search filter after deletion so the visible list stays consistent
+            const q = searchInput.value.toLowerCase().trim();
+            renderArticles(q ? articles.filter(a =>
+              a.title.toLowerCase().includes(q) || a.description.toLowerCase().includes(q)
+            ) : articles);
             renderAdminList();
           } catch (err) {
             console.error("Delete failed:", err);
@@ -343,7 +417,11 @@
         document.getElementById("article-image").value = "";
         document.getElementById("article-desc").value  = "";
 
-        renderArticles();
+        // Re-apply any active search filter after posting the new article
+        const q = searchInput.value.toLowerCase().trim();
+        renderArticles(q ? articles.filter(a =>
+          a.title.toLowerCase().includes(q) || a.description.toLowerCase().includes(q)
+        ) : articles);
         renderAdminList();
       } catch (err) {
         console.error("Post failed:", err);
@@ -358,6 +436,7 @@
 
   </script>
 
+  <!-- Menu.js handles hamburger menu and dark/light theme toggle -->
   <script src="/BearMetal Website/JS/Menu.js"></script>
 
 </body>
