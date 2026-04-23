@@ -44,13 +44,13 @@ function applyTheme(isDark) {
     // so the icon span always stayed blank regardless of theme.
     themeIcon.textContent = '';
     themeText.textContent = 'Dark Mode';
-    if (screenshot) screenshot.src = '/BearMetal Website/Gallery/Other/3606LogoDark.png';
+    if (screenshot) screenshot.src = '/Gallery/Other/3606LogoDark.png';
   } else {
     document.body.classList.remove('dark');
     themeToggle.checked   = false;
     themeIcon.textContent = '';
     themeText.textContent = 'Light Mode';
-    if (screenshot) screenshot.src = '/BearMetal Website/Gallery/Other/3606Logo.png';
+    if (screenshot) screenshot.src = '/Gallery/Other/3606Logo.png';
   }
 }
 
