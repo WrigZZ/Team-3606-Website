@@ -7,3 +7,5 @@ To run the code, put all files and folders into a parent folder together and ope
 4/16 - Made gallery divided by years and added some nice transitions and ui
 
 4/15 - Organized folders and files & made it work on mobile
+
+4/22 - Bug Fixes and making years highlight when on them
