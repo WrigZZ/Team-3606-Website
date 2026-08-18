@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/JS/SiteLock.js"></script>
+  <title>Export Calendar</title>
+  <link rel="stylesheet" href="/CSS/Calendar.css">
+  <link rel="icon" type="image/png" href="/Gallery/Other/Favicon.png">
+  <meta property="og:title" content="Export Calendar - Owen's Website">
+  <meta property="og:description" content="Export the calendar as an .ics file for Skylight or any other calendar app.">
+  <meta property="og:url" content="https://owenspeer.com/ExportCalendar.html">
+  <meta property="og:type" content="website">
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="logo">
+      <a href="/HTML/Home.html">
+        <img src="/Gallery/Other/FaviconLogo.png" alt="Logo" class="screenshot" id="screenshot">
+      </a>
+    </div>
+    <div class="midtext">
+      <p class="title">Owen's Website</p>
+    </div>
+    <div class="menudiv">
+      <button class="menu" id="menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="dropdown" id="dropdown">
+        <a href="/HTML/Home.html" class="droplink">Home</a>
+        <a href="/HTML/News.html" class="droplink">News</a>
+        <a href="/HTML/Calendar.html" class="droplink">Calendar</a>
+        <a href="/HTML/Assignments.html" class="droplink">Assignments</a>
+        <div class="droplink historymenu" id="history-btn">
+          History <span class="arrow">&#129030;</span>
+          <div class="subdropdown" id="subdropdown">
+            <a href="/YearsHTML/Sophomore.html" class="sublink">Sophomore</a>
+            <a href="/YearsHTML/Freshman.html" class="sublink">Freshman</a>
+            <a href="/YearsHTML/8th Grade.html" class="sublink">8th Grade</a>
+          </div>
+        </div>
+        <div class="theme-row" id="theme-row">
+          <span class="theme-label">
+            <span id="theme-icon"></span>
+            <span id="theme-text">Light Mode</span>
+          </span>
+          <label class="toggle-switch" title="Toggle dark mode">
+            <input type="checkbox" id="theme-toggle">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <p class="pagetitle">Export Calendar</p>
+
+    <p style="text-align:center; font-size:18px; color:var(--text-primary); max-width:600px; margin:0 auto 30px; line-height:1.6;">
+      This builds a standard <code>calendar.ics</code> file out of everything currently in the
+      calendar &mdash; entirely in your browser, no server involved. Download it, then upload
+      it to the root of your Cloudflare site so Skylight (or any calendar app) can subscribe
+      to it.
+    </p>
+
+    <p id="export-status" style="text-align:center; font-size:15px; color:rgb(140,140,140); min-height:20px;"></p>
+
+    <button class="edit-btn" id="export-btn">&#128190; Generate &amp; Download calendar.ics</button>
+  </div>
+
+  <div class="footer">
+    <div class="topbit">
+      <a href="https://owenspeer.com" target="_blank">
+        <img src="/Gallery/Other/3606Logo.png" alt="Blue Alliance" class="footerlink">
+      </a>
+      <a href="https://www.catholichigh.org/" target="_blank">
+        <img src="/Gallery/Other/CatholicLogo.jpg" alt="CHS" class="footerlink">
+      </a>
+      <a href="https://github.com/WrigZZ/Team-3606-Website" target="_blank">
+        <img src="/Gallery/Other/GithubLogo.png" alt="Web Code" class="footerlink">
+      </a>
+    </div>
+    <div class="bottombit"></div>
+    <div class="copyright">
+      <p>&copy; 2026 Owen Speer</p>
+    </div>
+  </div>
+
+  <script type="module" src="/JS/ExportCalendar.js"></script>
+
+  <script src="/JS/Menu.js"></script>
+
+</body>
+
+</html>

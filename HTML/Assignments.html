@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/JS/SiteLock.js"></script>
+  <title>Assignments</title>
+  <link rel="stylesheet" href="/CSS/Assignments.css">
+  <link rel="icon" type="image/png" href="/Gallery/Other/Favicon.png">
+  <meta property="og:title" content="Assignments - Owen's Website">
+  <meta property="og:description" content="Assignment tracker for Owen's Website.">
+  <meta property="og:url" content="https://owenspeer.com/Assignments.html">
+  <meta property="og:type" content="website">
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="logo">
+      <a href="/HTML/Home.html">
+        <img src="/Gallery/Other/FaviconLogo.png" alt="Logo" class="screenshot" id="screenshot">
+      </a>
+    </div>
+    <div class="midtext">
+      <p class="title">Owen's Website</p>
+    </div>
+    <div class="menudiv">
+      <button class="menu" id="menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="dropdown" id="dropdown">
+        <a href="/HTML/Home.html" class="droplink">Home</a>
+        <a href="/HTML/News.html" class="droplink">News</a>
+        <a href="/HTML/Calendar.html" class="droplink">Calendar</a>
+        <a href="/HTML/Assignments.html" class="droplink active">Assignments</a>
+        <div class="droplink historymenu" id="history-btn">
+          History <span class="arrow">&#129030;</span>
+          <div class="subdropdown" id="subdropdown">
+            <a href="/YearsHTML/Sophomore.html" class="sublink">Sophomore</a>
+            <a href="/YearsHTML/Freshman.html" class="sublink">Freshman</a>
+            <a href="/YearsHTML/8th Grade.html" class="sublink">8th Grade</a>
+          </div>
+        </div>
+        <div class="theme-row" id="theme-row">
+          <span class="theme-label">
+            <span id="theme-icon"></span>
+            <span id="theme-text">Light Mode</span>
+          </span>
+          <label class="toggle-switch" title="Toggle dark mode">
+            <input type="checkbox" id="theme-toggle">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <p class="pagetitle">Assignments</p>
+
+    <!-- Subject filter buttons -->
+    <div class="filter-bar" id="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active-filter" data-filter="all">All</button>
+      <!-- Subject buttons injected dynamically by JS -->
+    </div>
+
+    <!-- Assignment cards -->
+    <div class="assignments-container" id="assignments-container">
+      <p class="loading-msg" id="loading-msg">Loading assignments...</p>
+    </div>
+
+    <button class="edit-btn" id="edit-btn">&#9998; Add Assignment</button>
+  </div>
+
+
+  <!-- COMPLETE CONFIRMATION MODAL -->
+  <div class="overlay" id="confirm-overlay">
+    <div class="modal-box">
+      <p class="modal-title">Mark as Complete?</p>
+      <p class="confirm-text" id="confirm-text"></p>
+      <div class="modal-buttons">
+        <button class="modal-btn cancel-btn" id="confirm-cancel">Cancel</button>
+        <button class="modal-btn confirm-btn" id="confirm-yes">Yes, Complete</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ADMIN MODAL -->
+  <div class="overlay" id="admin-overlay">
+    <div class="modal-box admin-box">
+      <p class="modal-title">Add Assignment</p>
+
+      <div class="admin-section">
+        <p class="section-label">New Assignment</p>
+        <input type="text"  class="admin-input" id="assign-name"    placeholder="Assignment name">
+        <input type="text"  class="admin-input" id="assign-subject" placeholder="Subject (e.g. Chemistry H)">
+        <input type="date"  class="admin-input" id="assign-due">
+        <textarea class="admin-input admin-textarea" id="assign-notes" placeholder="Notes (optional)"></textarea>
+        <button class="modal-btn confirm-btn" id="add-assign-btn">Add Assignment</button>
+      </div>
+
+      <button class="modal-btn cancel-btn" id="close-admin" style="margin-top:8px;">Close</button>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <div class="topbit">
+      <a href="https://owenspeer.com" target="_blank">
+        <img src="/Gallery/Other/3606Logo.png" alt="Blue Alliance" class="footerlink">
+      </a>
+      <a href="https://www.catholichigh.org/" target="_blank">
+        <img src="/Gallery/Other/CatholicLogo.jpg" alt="CHS" class="footerlink">
+      </a>
+      <a href="https://github.com/WrigZZ/Team-3606-Website" target="_blank">
+        <img src="/Gallery/Other/GithubLogo.png" alt="Web Code" class="footerlink">
+      </a>
+    </div>
+    <div class="bottombit">
+    </div>
+    <div class="copyright">
+      <p>&copy; 2026 Owen Speer</p>
+    </div>
+  </div>
+
+
+  <script type="module" src="/JS/Assignments.js"></script>
+
+  <script src="/JS/Menu.js"></script>
+
+</body>
+
+</html>
