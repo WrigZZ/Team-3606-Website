@@ -5,36 +5,41 @@
    THEME VARIABLES
    ===================== */
 
-/* Light theme (default) */
 :root {
-  --bg:            rgb(250, 250, 250);
-  --text-primary:  rgb(0, 0, 0);
-  --text-title:  rgb(255, 255, 255);
-  --text-body:     rgb(255, 68, 0);
-  --topbar-bg:     rgb(36, 36, 36);
-  --footer-bg:     rgb(36, 36, 36);
-  --footer-text:   rgb(255, 255, 255);
-  --logo-bg:       black;
+  --bg:           rgb(250, 250, 250);
+  --text-primary: rgb(0, 0, 0);
+  --text-title:   rgb(255, 255, 255);
+  --text-body:    rgb(0, 132, 255);
+  --topbar-bg:    rgb(36, 36, 36);
+  --footer-bg:    rgb(36, 36, 36);
+  --footer-text:  rgb(255, 255, 255);
+  --logo-bg:      black;
+  --card-bg:      rgb(255, 255, 255);
+  --card-border:  rgb(220, 220, 220);
+  --card-desc:    rgb(90, 90, 90);
+  --accent:         rgb(0, 132, 255);
+  --accent-light:   rgb(95, 180, 255);
+  --accent-lighter: rgb(72, 169, 255);
+  --accent-dark:    rgb(0, 112, 216);
+  --accent-sub:     rgb(72, 169, 255);
 }
 
-/* Dark theme — applied when <body> has class "dark" */
 body.dark {
-  --bg:            rgb(18, 18, 18);
-  --text-primary:  rgb(255, 255, 255);
-  --text-title:  rgb(255, 255, 255);
-  --text-body:     rgb(255, 68, 0);
-  --topbar-bg:     rgb(80, 80, 80);
-  --footer-bg:     rgb(80, 80, 80);
-  --footer-text:   rgb(255, 255, 255);
-  --logo-bg:       rgb(10, 10, 10);
+  --bg:           rgb(18, 18, 18);
+  --text-primary: rgb(255, 255, 255);
+  --text-title:   rgb(255, 255, 255);
+  --text-body:    rgb(0, 132, 255);
+  --topbar-bg:    rgb(80, 80, 80);
+  --footer-bg:    rgb(80, 80, 80);
+  --footer-text:  rgb(255, 255, 255);
+  --logo-bg:      rgb(10, 10, 10);
+  --card-bg:      rgb(30, 30, 30);
+  --card-border:  rgb(55, 55, 55);
+  --card-desc:    rgb(190, 190, 190);
 }
 
-/* Sets "Montserrat" as the default font for every element on the page */
-* {
-  font-family: "Montserrat";
-}
+* { font-family: "Montserrat"; }
 
-/* Removes default browser spacing around the page and sets the background */
 body {
   margin: 0;
   padding: 0;
@@ -42,13 +47,13 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* .topbar is the navigation bar pinned to the top of the screen at all times */
+/* =====================
+   TOPBAR
+   ===================== */
+
 .topbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,43 +64,42 @@ body {
   transition: background-color 0.3s ease;
 }
 
-/* .logo is the container for the team logo image on the left side of the topbar */
 .logo {
   display: flex;
   margin-left: 15%;
   margin-right: auto;
 }
 
-/* .screenshot is the team logo image inside .logo */
 .screenshot {
   height: 120px;
   display: block;
   background-color: var(--logo-bg);
 }
 
-/* .midtext is the container for the team name in the center of the topbar */
 .midtext {
   position: absolute;
-  margin-right: auto;
-  margin-left: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 40%;
+  text-align: center;
+  pointer-events: none;
 }
 
-/* .title is the "Bear Metal Team 3606" text inside .midtext */
 .title {
   font-size: 40px;
   font-weight: 500;
-  color: rgb(255, 255, 255);
   color: var(--text-title);
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
 
-/* .menudiv is the wrapper for the hamburger button and .dropdown */
 .menudiv {
   position: relative;
   margin-right: 40px;
 }
 
-/* .menu is the hamburger button itself */
 .menu {
   display: flex;
   flex-direction: column;
@@ -103,13 +107,11 @@ body {
   width: 36px;
   height: 26px;
   background: none;
-  border: 2px;
-  border-color: rgb(255, 255, 255);
+  border: none;
   cursor: pointer;
   padding: 0;
 }
 
-/* Each span inside .menu is one of the three horizontal bars */
 .menu span {
   display: block;
   width: 100%;
@@ -119,24 +121,19 @@ body {
   transition: all 0.3s ease;
 }
 
-.menu.open span:nth-child(1) {
-  transform: translateY(11px) rotate(45deg);
-}
+.menu.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+.menu.open span:nth-child(2) { opacity: 0; }
+.menu.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
 
-.menu.open span:nth-child(2) {
-  opacity: 0;
-}
+/* =====================
+   DROPDOWN
+   ===================== */
 
-.menu.open span:nth-child(3) {
-  transform: translateY(-11px) rotate(-45deg);
-}
-
-/* .dropdown is the navigation menu that drops down from .menudiv */
 .dropdown {
   position: absolute;
   top: calc(100% + 24px);
   right: 0;
-  background-color: rgb(255, 95, 37);
+  background-color: var(--accent);
   border: 2px solid black;
   min-width: 180px;
   flex-direction: column;
@@ -149,41 +146,38 @@ body {
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.droplink:last-child {
-  border-radius: 0 0 8px 8px;
-  border-bottom: none;
-}
-
 .dropdown.open {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-/* .droplink is the style for each navigation link row inside .dropdown */
+.droplink:last-child {
+  border-radius: 0 0 8px 8px;
+  border-bottom: none;
+}
+
 .droplink {
   color: black;
   text-decoration: none;
   padding: 14px 20px;
   font-size: 18px;
-  background-color: rgb(255, 135, 91);
+  background-color: var(--accent-light);
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: background-color 0.2s ease;
   position: relative;
 }
 
-.droplink:hover {
-  background-color: rgb(255, 159, 124);
-}
+.droplink:hover { background-color: var(--accent-lighter); }
 
 .droplink.active {
-  background-color: rgb(200, 60, 10);
+  background-color: var(--accent-dark);
+  color: white;
   cursor: default;
   pointer-events: none;
 }
 
-/* .historymenu is the "History" row that contains .subdropdown */
 .historymenu {
   display: flex;
   align-items: center;
@@ -192,21 +186,15 @@ body {
   position: relative;
 }
 
-.arrow {
-  transition: transform 0.2s ease;
-}
+.arrow { transition: transform 0.2s ease; }
+.historymenu.open .arrow { transform: rotate(90deg); }
 
-.historymenu.open .arrow {
-  transform: rotate(90deg);
-}
-
-/* .subdropdown is the nested year list */
 .subdropdown {
   flex-direction: column;
   position: absolute;
   right: 100%;
   bottom: 0;
-  background-color: rgb(255, 115, 65);
+  background-color: var(--accent-light);
   border: 2px solid black;
   border-radius: 10px;
   min-width: 140px;
@@ -220,14 +208,11 @@ body {
 }
 
 .subdropdown::-webkit-scrollbar { width: 6px; }
-.subdropdown::-webkit-scrollbar-track { background: rgb(255, 95, 37); border-radius: 10px; margin: 3px; }
-.subdropdown::-webkit-scrollbar-thumb { background: rgb(200, 60, 10); border-radius: 10px; }
+.subdropdown::-webkit-scrollbar-track { background: var(--accent-sub); border-radius: 10px; margin: 3px; }
+.subdropdown::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 10px; }
 .subdropdown::-webkit-scrollbar-thumb:hover { background: black; }
 
-.subdropdown.open {
-  opacity: 1;
-  pointer-events: auto;
-}
+.subdropdown.open { opacity: 1; pointer-events: auto; }
 
 .sublink {
   color: black;
@@ -238,21 +223,26 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.sublink:hover {
-  background-color: rgb(255, 159, 124);
+.sublink:hover { background-color: var(--accent-lighter); }
+
+.active {
+  background-color: var(--accent-dark);
+  color: white;
+  cursor: default;
+  pointer-events: none;
+  border-color: black;
 }
 
 /* =====================
    THEME TOGGLE ROW
    ===================== */
 
-/* The row inside the dropdown that holds the toggle switch */
 .theme-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: rgb(255, 135, 91);
+  background-color: var(--accent-light);
   border-radius: 0 0 5px 5px;
   border-bottom: none;
   cursor: default;
@@ -268,7 +258,6 @@ body {
   gap: 6px;
 }
 
-/* The toggle switch track */
 .toggle-switch {
   position: relative;
   width: 46px;
@@ -276,14 +265,8 @@ body {
   flex-shrink: 0;
 }
 
-/* Hide the real checkbox */
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
 
-/* The visual slider track */
 .toggle-track {
   position: absolute;
   inset: 0;
@@ -294,7 +277,6 @@ body {
   border: 1.5px solid rgba(0,0,0,0.3);
 }
 
-/* The sliding circle (thumb) */
 .toggle-track::before {
   content: '';
   position: absolute;
@@ -309,11 +291,7 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-/* When checked (dark mode), slide the thumb to the right and darken the track */
-.toggle-switch input:checked + .toggle-track {
-  background-color: rgba(0,0,0,0.55);
-}
-
+.toggle-switch input:checked + .toggle-track { background-color: rgba(0,0,0,0.55); }
 .toggle-switch input:checked + .toggle-track::before {
   transform: translateY(-50%) translateX(22px);
   background-color: rgb(36, 36, 36);
@@ -326,53 +304,97 @@ body {
 .content {
   margin-top: 175px;
   margin-left: 10%;
-  color: var(--text-body);
   margin-right: 10%;
+  margin-bottom: 60px;
+  color: var(--text-body);
   transition: color 0.3s ease;
 }
 
 .intro {
   text-align: center;
-  font-size: 50px;
+  font-size: 70px;
   color: var(--text-primary);
   font-weight: 600;
+  margin: 0 0 50px;
   transition: color 0.3s ease;
 }
 
-.mainpic {
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  border-radius: 25px;
+/* =====================
+   PAGE CARD GRID
+   ===================== */
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
 }
 
-.seasonmain {
-  z-index: 2;
-  left: 50%;
-  right: 50%;
-  text-align: center;
-  position: absolute;
-  justify-self: center;
+.page-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+              background-color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.page-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.13);
+  border-color: var(--accent-light);
+}
+
+.page-card-icon {
+  font-size: 48px;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 132, 255, 0.1);
+  border-radius: 16px;
+}
+
+.page-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.page-card-title {
+  font-size: 26px;
   font-weight: 700;
-  margin: 0;
-  padding-top: 100px;
-  white-space: nowrap;
-  font-size: 50px;
-  color: rgb(255, 68, 0);
-  border: black;
-  text-shadow:
-    -2px -2px 0 #000,
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000;
+  color: var(--accent);
+  margin: 0 0 6px;
+  transition: color 0.3s ease;
 }
 
-.description {
-  font-size: 30px;
-  margin-bottom: 40px;
-  text-align: center;
-  color: var(--text-body);
+.page-card-desc {
+  font-size: 15px;
+  color: var(--card-desc);
+  margin: 0;
+  line-height: 1.5;
   transition: color 0.3s ease;
+}
+
+.page-card-arrow {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-light);
+  flex-shrink: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.page-card:hover .page-card-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
 }
 
 /* =====================
@@ -423,13 +445,6 @@ body {
   transition: color 0.3s ease;
 }
 
-.active {
-  background-color: rgb(200, 60, 10);
-  cursor: default;
-  pointer-events: none;
-  border-color: rgb(0, 0, 0);
-}
-
 /* =====================
    RESPONSIVE
    ===================== */
@@ -438,9 +453,8 @@ body {
   .logo { margin-left: 20px; }
   .screenshot { height: 70px; }
   .title { font-size: 20px; }
-  .menudiv { margin-right: 15px; }
   .midtext { max-width: 35%; }
-  
+  .menudiv { margin-right: 15px; }
 
   .content {
     margin-top: 120px;
@@ -448,9 +462,13 @@ body {
     margin-right: 5%;
   }
 
-  .intro { font-size: 28px; }
-  .seasonmain { font-size: 28px; padding-top: 40px; }
-  .description { font-size: 18px; }
+  .intro { font-size: 40px; margin-bottom: 30px; }
+
+  .page-grid { grid-template-columns: 1fr; gap: 18px; }
+  .page-card { padding: 20px 18px; }
+  .page-card-icon { font-size: 36px; width: 52px; height: 52px; }
+  .page-card-title { font-size: 20px; }
+  .page-card-desc { font-size: 14px; }
 
   .footerlink { height: 45px; margin-left: 6px; margin-right: 6px; }
   .link { font-size: 16px; margin-left: 10px; margin-right: 10px; }
